@@ -1,0 +1,31 @@
+# Model checkpoints (140 GB)
+checkpoints/
+
+# Large data files (keep splits.json)
+data/raw/
+data/processed/*.jsonl
+data/cache/
+
+# Virtual environment
+gpu_env/
+
+# Logs
+logs/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+*.so
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Editor / OS
+.DS_Store
+.idea/
+*.swp
+*.swo
