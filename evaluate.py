@@ -118,6 +118,18 @@ def load_test_instances(cfg: Config, all_instances: bool = False) -> list[dict]:
     return [inst for inst in instances if inst["instance_id"] in test_ids]
 
 
+def _load_all_instances(cfg: Config) -> list[dict]:
+    """Load every instance from the instances file (no split filter)."""
+    instances_path = Path(cfg.data.instances_lite_path)
+    instances = []
+    with open(instances_path) as fh:
+        for line in fh:
+            line = line.strip()
+            if line:
+                instances.append(json.loads(line))
+    return instances
+
+
 # ---------------------------------------------------------------------------
 # Experiment 1 — Geometric Structure Validation
 # ---------------------------------------------------------------------------
@@ -164,6 +176,8 @@ def run_geometry(
     embs_for_umap: dict[str, list[np.ndarray]] = {"1": [], "2a": [], "2b": [], "3": []}
     # Entity embeddings for UMAP (REQ/TEST/ORIG, one point per instance)
     entity_embs_for_umap: dict[str, list[np.ndarray]] = {"REQ": [], "TEST": [], "ORIG": []}
+    # Per-hunk metadata for traceability: (instance_id, hunk_text, sim_req, sim_test, sim_orig)
+    hunk_meta_for_umap: dict[str, list[tuple]] = {"1": [], "2a": [], "2b": [], "3": []}
 
     for inst in instances:
         label_instance_inplace(inst)
@@ -177,6 +191,28 @@ def run_geometry(
         ]
         for h in tier3_lookup.get(inst.get("instance_id", ""), []):
             all_hunks.append((h, 3))
+
+        # Pre-compute instance-level anchor embeddings (normalised) for per-hunk sims
+        iid = inst.get("instance_id", "")
+        if collect_umap:
+            r_emb_inst = encoder.encode([req], "REQ", device, use_projection)
+            r_norm_inst = F.normalize(r_emb_inst, dim=-1)           # (1, D)
+            entity_embs_for_umap["REQ"].append(r_emb_inst.cpu().numpy()[0])
+
+            if test_texts:
+                t_embs_inst = encoder.encode(test_texts, "TEST", device, use_projection)
+                t_norm_inst = F.normalize(t_embs_inst.mean(dim=0, keepdim=True), dim=-1)  # (1, D)
+                entity_embs_for_umap["TEST"].append(t_embs_inst.mean(dim=0).cpu().numpy())
+            else:
+                t_norm_inst = None
+
+            orig_codes_inst = [u["code"] for u in source_units[:10] if u.get("code")]
+            if orig_codes_inst:
+                o_embs_inst = encoder.encode(orig_codes_inst, "ORIG", device, use_projection)
+                o_norm_inst = F.normalize(o_embs_inst.mean(dim=0, keepdim=True), dim=-1)  # (1, D)
+                entity_embs_for_umap["ORIG"].append(o_embs_inst.mean(dim=0).cpu().numpy())
+            else:
+                o_norm_inst = None
 
         for hunk, base_tier in all_hunks:
             hunk_text = _render_hunk(hunk)
@@ -207,32 +243,45 @@ def run_geometry(
 
             # Hunk embedding (shared across UMAP + ORIG-component computation)
             h_emb = encoder.encode([hunk_text], "HUNK", device, use_projection)  # (1, D)
+            h_norm = F.normalize(h_emb, dim=-1)
 
             if collect_umap:
                 embs_for_umap[eff_tier].append(h_emb.cpu().numpy()[0])
+
+                # Per-hunk individual component similarities for traceability analysis
+                sim_req  = (h_norm * r_norm_inst).sum(-1).item()
+                sim_test = (h_norm * t_norm_inst).sum(-1).item() if t_norm_inst is not None else 0.0
+                # ORIG: use hunk-specific orig if available, else instance-level
+                if hunk_orig_texts:
+                    o_embs_h = encoder.encode(hunk_orig_texts, "ORIG", device, use_projection)
+                    o_norm_h = F.normalize(o_embs_h.mean(dim=0, keepdim=True), dim=-1)
+                    sim_orig = (h_norm * o_norm_h).sum(-1).item()
+                elif o_norm_inst is not None:
+                    sim_orig = (h_norm * o_norm_inst).sum(-1).item()
+                else:
+                    sim_orig = 0.0
+
+                hunk_meta_for_umap[eff_tier].append((
+                    iid,
+                    hunk_text[:600],   # truncated for storage
+                    round(sim_req, 4),
+                    round(sim_test, 4),
+                    round(sim_orig, 4),
+                ))
 
             # ORIG-component similarity: γ·sim(hunk, mean(relevant_ORIG))
             # Used to confirm the Tier-2a >> Tier-2b internal gradient.
             if base_tier == 2:
                 if hunk_orig_texts:  # 2a: has relevant ORIG units
-                    o_embs = encoder.encode(hunk_orig_texts, "ORIG", device, use_projection)
-                    o_norm = F.normalize(o_embs.mean(dim=0, keepdim=True), dim=-1)
-                    orig_sim = (h_emb * o_norm).sum(-1).item()
+                    if not collect_umap:  # already computed above when collect_umap
+                        o_embs = encoder.encode(hunk_orig_texts, "ORIG", device, use_projection)
+                        o_norm = F.normalize(o_embs.mean(dim=0, keepdim=True), dim=-1)
+                        orig_sim = (h_norm * o_norm).sum(-1).item()
+                    else:
+                        orig_sim = sim_orig
                 else:               # 2b: no ORIG match → similarity is 0 by construction
                     orig_sim = 0.0
                 orig_sim_scores[eff_tier].append(orig_sim)
-
-        # Collect instance-level entity embeddings for UMAP (REQ/TEST/ORIG anchors)
-        if collect_umap:
-            r_emb = encoder.encode([req], "REQ", device, use_projection)
-            entity_embs_for_umap["REQ"].append(r_emb.cpu().numpy()[0])
-            if test_texts:
-                t_embs = encoder.encode(test_texts, "TEST", device, use_projection)
-                entity_embs_for_umap["TEST"].append(t_embs.mean(dim=0).cpu().numpy())
-            orig_codes = [u["code"] for u in source_units[:10] if u.get("code")]
-            if orig_codes:
-                o_embs = encoder.encode(orig_codes, "ORIG", device, use_projection)
-                entity_embs_for_umap["ORIG"].append(o_embs.mean(dim=0).cpu().numpy())
 
     # --- Summary statistics ---
     for key in ("1", "2a", "2b", "3"):
@@ -274,7 +323,8 @@ def run_geometry(
 
     _maybe_histogram(tier_scores)
     if collect_umap:
-        _maybe_umap(embs_for_umap, entity_embs_for_umap, model_label=model_label)
+        _maybe_umap(embs_for_umap, entity_embs_for_umap,
+                    hunk_meta=hunk_meta_for_umap, model_label=model_label)
 
 
 def _maybe_histogram(tier_scores: dict[str, list[float]]) -> None:
@@ -303,6 +353,7 @@ def _maybe_histogram(tier_scores: dict[str, list[float]]) -> None:
 def _maybe_umap(
     embs_for_umap: dict[str, list[np.ndarray]],
     entity_embs: dict[str, list[np.ndarray]],
+    hunk_meta: dict[str, list[tuple]] | None = None,
     model_label: str = "m4",
 ) -> None:
     try:
@@ -366,10 +417,26 @@ def _maybe_umap(
     # --- Save raw coords for optional M0 vs M4 paired figure ---
     out_dir = Path("logs")
     out_dir.mkdir(exist_ok=True)
+    # Build flat metadata arrays ordered to match hunk_keys
+    meta_iid, meta_text, meta_sreq, meta_stest, meta_sorig = [], [], [], [], []
+    if hunk_meta:
+        for key in ("1", "2a", "2b", "3"):
+            for (iid, txt, sr, st, so) in hunk_meta.get(key, []):
+                meta_iid.append(iid)
+                meta_text.append(txt)
+                meta_sreq.append(sr)
+                meta_stest.append(st)
+                meta_sorig.append(so)
+
     np.savez(
         out_dir / f"umap_embs_{model_label}.npz",
         coords=coords, tags=np.array(all_tags), n_hunks=n_hunks,
         sil=np.array([sil if sil is not None else float("nan")]),
+        meta_iid=np.array(meta_iid, dtype=object),
+        meta_text=np.array(meta_text, dtype=object),
+        meta_sreq=np.array(meta_sreq, dtype=np.float32),
+        meta_stest=np.array(meta_stest, dtype=np.float32),
+        meta_sorig=np.array(meta_sorig, dtype=np.float32),
     )
     log.info("UMAP embeddings saved → logs/umap_embs_%s.npz", model_label)
 
@@ -522,48 +589,98 @@ def _ndcg(relevances: list[float], k: int) -> float:
 # Experiment 2 — Retrieval (nDCG@k)
 # ---------------------------------------------------------------------------
 
-def run_retrieval(cfg: Config, encoder: EntailmentEncoder, device: torch.device, all_instances: bool = False, use_projection: bool = True) -> None:
-    log.info("=== Experiment 2: Retrieval (nDCG@k) ===")
+def run_retrieval(
+    cfg: Config,
+    encoder: EntailmentEncoder,
+    device: torch.device,
+    all_instances: bool = False,
+    use_projection: bool = True,
+    repo_pool: bool = False,
+    repo_pool_max: int = 50,
+) -> None:
+    log.info("=== Experiment 2: Retrieval ===")
 
     instances = load_test_instances(cfg, all_instances=all_instances)
     log.info("Test instances: %d", len(instances))
 
     tier3_lookup = load_tier3_lookup(cfg.eval.tier3_path) if cfg.eval.tier3_path else {}
     if tier3_lookup:
-        log.info("Tier-3 lookup loaded: %d instances with scope-creep hunks", len(tier3_lookup))
+        log.info("Tier-3 lookup: %d instances with scope-creep hunks", len(tier3_lookup))
+
+    # Build repo-level distractor pool: same repo, different instance, gold hunks → tier 0
+    # Use only test-split instances to avoid leakage from training data.
+    # Store each hunk's own orig_texts so distractors get their real ORIG score,
+    # not zero from a file-path mismatch against the test instance's source_units.
+    repo_hunk_pool: dict[str, list[tuple[str, str, dict]]] = {}
+    if repo_pool:
+        log.info("Building repo-level distractor pool (test split only) …")
+        for inst in instances:  # already filtered to test split above
+            iid  = inst.get("instance_id", "")
+            repo = iid.split("__")[0]
+            label_instance_inplace(inst)
+            for hunk in inst.get("gold_hunks", []):
+                text = _render_hunk(hunk)
+                if text.strip():
+                    repo_hunk_pool.setdefault(repo, []).append((iid, text, hunk))
+        log.info("Repo pool: %d repos, %d total hunks",
+                 len(repo_hunk_pool), sum(len(v) for v in repo_hunk_pool.values()))
 
     tier_rel = cfg.eval.tier_relevance
-    k_values = list(cfg.eval.retrieval_k_values)
+    rng = random.Random(42)
 
-    ndcg_accum: dict[int, list[float]] = {k: [] for k in k_values}
-    tier2_recall: list[float] = []
+    # Accumulators for new metrics
+    ndcg_kgold:    list[float] = []  # nDCG @ k=gold_count, instances with T3
+    t2_recall:     list[float] = []  # T2 recall with K = gold_count (T1+T2)
+    perfect_sep:   list[float] = []  # 1.0 if ALL T3 ranked after ALL gold
 
     for inst in instances:
         label_instance_inplace(inst)
+        iid          = inst.get("instance_id", "")
         req          = inst.get("requirement", "")[:cfg.data.max_req_chars]
         test_texts   = [tf["code"] for tf in inst.get("test_functions", []) if tf.get("code")]
         source_units = inst.get("source_units", [])
 
-        # Track hunk dicts so we can apply _units_for_hunk per candidate (Issue 2 fix)
-        candidates: list[tuple[str, int, dict]] = []  # (text, tier, hunk_dict)
+        # (text, tier, hunk_dict, orig_override|None)
+        # orig_override=None  → use test instance's source_units at score time
+        # orig_override=list  → use pre-stored orig from the hunk's own instance
+        candidates: list[tuple[str, int, dict, list[str] | None]] = []
         for hunk in inst.get("gold_hunks", []):
             text = _render_hunk(hunk)
             if text.strip():
-                tier = hunk.get("tier_label") or 1
-                candidates.append((text, tier, hunk))
-        for hunk in tier3_lookup.get(inst.get("instance_id", ""), []):
+                candidates.append((text, hunk.get("tier_label") or 1, hunk, None))
+        for hunk in tier3_lookup.get(iid, []):
             text = _render_hunk(hunk)
             if text.strip():
-                candidates.append((text, 3, hunk))
+                candidates.append((text, 3, hunk, None))
+
+        # Same-repo cross-issue gold hunks as tier-0 distractors.
+        # Distractors use None for orig_override so they are scored with the TEST
+        # instance's source_units. Their files won't match → ORIG=0, which is
+        # semantically correct: a distractor does not modify code relevant to THIS
+        # requirement. ORIG should only reward hunks tied to this instance's codebase.
+        if repo_pool:
+            repo = iid.split("__")[0]
+            pool = [(t, h) for (eid, t, h) in repo_hunk_pool.get(repo, []) if eid != iid]
+            if len(pool) > repo_pool_max:
+                pool = rng.sample(pool, repo_pool_max)
+            for text, hunk in pool:
+                candidates.append((text, 0, hunk, None))
 
         if len(candidates) < 2:
             continue
 
-        hunk_texts = [c[0] for c in candidates]
         tiers      = [c[1] for c in candidates]
-        # Per-hunk ORIG: only units that the specific hunk modifies, not all source_units
+        has_tier3  = any(t == 3 for t in tiers)
+        gold_total = sum(1 for t in tiers if t in (1, 2))
+        tier2_total = sum(1 for t in tiers if t == 2)
+
+        if gold_total == 0:
+            continue
+
+        hunk_texts = [c[0] for c in candidates]
         hunk_orig_texts = [
-            [u["code"] for u in _units_for_hunk(c[2], source_units) if u.get("code")]
+            c[3] if c[3] is not None
+            else [u["code"] for u in _units_for_hunk(c[2], source_units) if u.get("code")]
             for c in candidates
         ]
 
@@ -579,30 +696,40 @@ def run_retrieval(cfg: Config, encoder: EntailmentEncoder, device: torch.device,
             use_projection=use_projection,
         ).tolist()
 
-        ranked     = sorted(zip(scores, tiers), key=lambda x: x[0], reverse=True)
+        # Random tiebreak avoids insertion-order bias when scores are tied (e.g.
+        # zero-ORIG candidates like T2b and distractors both scoring 0 under no_req).
+        tiebreaks  = [rng.random() for _ in scores]
+        ranked     = sorted(zip(scores, tiers, tiebreaks), key=lambda x: (x[0], x[2]), reverse=True)
+        ranked     = [(s, t) for s, t, _ in ranked]
         ranked_rel = [tier_rel.get(t, 0.0) for _, t in ranked]
 
-        # nDCG only on instances that have T3 candidates (scope-creep detection task)
-        has_tier3 = any(t == 3 for t in tiers)
+        # nDCG @ k=gold_total (only instances with T3 scope-creep candidates)
         if has_tier3:
-            for k in k_values:
-                ndcg_accum[k].append(_ndcg(ranked_rel, k))
+            ndcg_kgold.append(_ndcg(ranked_rel, gold_total))
 
-        tier2_total = sum(1 for t in tiers if t == 2)
-        if tier2_total > 0:
-            tier2_in_top = sum(1 for _, t in ranked[:tier2_total] if t == 2)
-            tier2_recall.append(tier2_in_top / tier2_total)
+        # T2-Recall: top-gold_total slots — how many T2 hunks appear?
+        # Only on instances that also have T3 candidates (same condition as nDCG),
+        # otherwise there is no scope-creep pressure and the task is trivially easy.
+        if tier2_total > 0 and has_tier3:
+            tier2_in_top = sum(1 for _, t in ranked[:gold_total] if t == 2)
+            t2_recall.append(tier2_in_top / tier2_total)
 
-    for k in k_values:
-        vals = ndcg_accum[k]
-        if vals:
-            log.info("nDCG@%2d  mean=%.4f  std=%.4f  n=%d", k, np.mean(vals), np.std(vals), len(vals))
+        # Perfect-Sep: every T3 ranked strictly after every gold hunk
+        if has_tier3:
+            gold_ranks = [i for i, (_, t) in enumerate(ranked) if t in (1, 2)]
+            t3_ranks   = [i for i, (_, t) in enumerate(ranked) if t == 3]
+            if gold_ranks and t3_ranks:
+                perfect_sep.append(1.0 if min(t3_ranks) > max(gold_ranks) else 0.0)
 
-    if tier2_recall:
-        log.info(
-            "Tier-2 Recall  mean=%.4f  std=%.4f  n=%d",
-            np.mean(tier2_recall), np.std(tier2_recall), len(tier2_recall),
-        )
+    if ndcg_kgold:
+        log.info("nDCG@k_gold  mean=%.4f  std=%.4f  n=%d  (k = |T1∪T2| per instance)",
+                 np.mean(ndcg_kgold), np.std(ndcg_kgold), len(ndcg_kgold))
+    if t2_recall:
+        log.info("T2-Recall(K=gold)  mean=%.4f  std=%.4f  n=%d  (top-K = |T1∪T2|)",
+                 np.mean(t2_recall), np.std(t2_recall), len(t2_recall))
+    if perfect_sep:
+        log.info("Perfect-Sep  mean=%.4f  n=%d  (all T3 ranked after all gold)",
+                 np.mean(perfect_sep), len(perfect_sep))
 
 
 # ---------------------------------------------------------------------------
@@ -615,6 +742,7 @@ def main(
     all_instances: bool = False,
     use_projection: bool = True,
     collect_umap: bool = False,
+    repo_pool: bool = False,
 ) -> None:
     device = (
         torch.device("cuda") if torch.cuda.is_available()
@@ -645,7 +773,10 @@ def main(
         )
 
     if exp in ("retrieval", "all"):
-        run_retrieval(cfg, encoder, device, all_instances=all_instances, use_projection=use_projection)
+        run_retrieval(cfg, encoder, device,
+                      all_instances=all_instances,
+                      use_projection=use_projection,
+                      repo_pool=repo_pool)
 
 
 if __name__ == "__main__":
@@ -664,6 +795,8 @@ if __name__ == "__main__":
     parser.add_argument("--score-alpha", type=float, default=None, help="Override score_alpha")
     parser.add_argument("--score-beta",  type=float, default=None, help="Override score_beta")
     parser.add_argument("--score-gamma", type=float, default=None, help="Override score_gamma")
+    parser.add_argument("--repo-pool", action="store_true",
+                        help="Add same-repo cross-issue gold hunks as tier-0 distractors")
     args = parser.parse_args()
 
     cfg = default_config
@@ -688,4 +821,5 @@ if __name__ == "__main__":
         all_instances=args.all_instances,
         use_projection=use_projection,
         collect_umap=args.umap,
+        repo_pool=args.repo_pool,
     )

@@ -1,0 +1,146 @@
+% ─────────────────────────────────────────────────────────────────
+%  Appendix: Proximity Region Examples
+%  \input{appendix_regions}  inside your \appendix block
+%  Requires: \usepackage{listings}
+% ─────────────────────────────────────────────────────────────────
+
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  frame=single,
+  framerule=0.4pt,
+  rulecolor=\color{gray!50},
+  backgroundcolor=\color{gray!4},
+  xleftmargin=6pt,
+  xrightmargin=6pt,
+  aboveskip=4pt,
+  belowskip=4pt,
+}
+
+\section{Proximity Region Examples}
+\label{app:region_examples}
+
+The five proximity regions (Table~\ref{tab:regions} in the main paper) are defined
+by thresholding the three similarity components of the entailment score:
+$s_r = \mathrm{sim}(h,r)$,
+$s_t = \mathrm{sim}(h,\bar{t})$,
+$s_o = \mathrm{sim}(h,\bar{o})$,
+with thresholds $\tau_r{=}0.65$, $\tau_t{=}0.40$, $\tau_o{=}0.80$.
+We give one representative hunk per region, drawn from the Django test split.
+
+% ------------------------------------------------------------------
+\paragraph{R1 — REQ\,+\,TEST active \textnormal{($s_r > \tau_r$, $s_t > \tau_t$)}.}
+A semantically aligned edit whose modified source file is covered by at least one
+fail-to-pass test.
+
+\smallskip
+\noindent\textit{Requirement (django\#10904):}
+Replace all \texttt{OSError} aliases (\texttt{IOError}, \texttt{EnvironmentError},
+\texttt{WindowsError}, etc.) with the canonical \texttt{OSError}, following the
+Python~3.3+ unification of these exception classes.
+
+\begin{lstlisting}
+# django/contrib/gis/gdal/libgdal.py
+-        except IOError:
++        except OSError:
+\end{lstlisting}
+
+\noindent$s_r{=}0.78$,\ $s_t{=}0.41$,\ $s_o{=}0.72$.
+The change directly implements the requirement text (\textit{``replace IOError with OSError''})
+and the modified file is imported by a fail-to-pass test, activating both the REQ and TEST
+anchors.
+
+% ------------------------------------------------------------------
+\paragraph{R2 — REQ\,+\,ORIG active \textnormal{($s_r > \tau_r$, $s_o > \tau_o$)}.}
+Semantically aligned and structurally grounded, but not covered by any fail-to-pass test.
+
+\smallskip
+\noindent\textit{Requirement (django\#12364):}
+Admin changelist ordering detection should take into account \texttt{UniqueConstraint}s
+without conditions when checking for a total ordering, not only \texttt{unique\_together}
+fields.
+
+\begin{lstlisting}
+# django/db/models/base.py  (_get_unique_checks)
+-        constraints = [(self.__class__, self._meta.constraints)]
++        constraints = [(self.__class__, self._meta.total_unique_constraints)]
+\end{lstlisting}
+
+\noindent$s_r{=}0.80$,\ $s_t{=}0.33$,\ $s_o{=}0.94$.
+The hunk substitutes the attribute referenced in the requirement
+(\texttt{total\_unique\_constraints}), and the surrounding source unit
+(\texttt{\_get\_unique\_checks}) is highly similar to the hunk, driving $s_o$ above
+threshold.  No fail-to-pass test imports \texttt{base.py} directly, so $s_t$ stays
+below $\tau_t$.
+
+% ------------------------------------------------------------------
+\paragraph{R3 — REQ only active \textnormal{($s_r > \tau_r$)}.}
+Requirement-aligned but adds new code with no pre-existing structural anchor.
+
+\smallskip
+\noindent\textit{Requirement (django\#10301):}
+SQLite database functions (\texttt{Power}, \texttt{Sqrt}, etc.) crash with an
+\texttt{OperationalError} when called on \texttt{NULL} values.
+
+\begin{lstlisting}
+# django/db/backends/sqlite3/base.py
+ import decimal
++import functools
+ import math
+\end{lstlisting}
+
+\noindent$s_r{=}0.82$,\ $s_t{=}0.29$,\ $s_o{=}0.61$.
+The requirement keyword \textit{``SQLite''} drives $s_r$ above threshold.
+Because \texttt{functools} was not previously used in this file, there is no
+pre-existing code structure for the encoder to ground the hunk against, keeping
+$s_o$ below $\tau_o$.
+
+% ------------------------------------------------------------------
+\paragraph{R4 — ORIG only active \textnormal{($s_o > \tau_o$)}.}
+Structurally induced: the hunk modifies existing code that is structurally implicated
+by the change, but the requirement text does not mention it.
+
+\smallskip
+\noindent\textit{Requirement (django\#16072):}
+\texttt{update\_or\_create} should update only the fields listed in
+\texttt{update\_fields}, not the entire model object, to avoid unnecessary writes.
+
+\begin{lstlisting}
+# django/db/models/options.py  (Options.FORWARD_PROPERTIES)
+         "local_concrete_fields",
++        "_non_pk_concrete_field_names",
+         "_forward_fields_map",
+\end{lstlisting}
+
+\noindent$s_r{=}0.32$,\ $s_t{=}0.00$,\ $s_o{=}0.83$.
+The requirement concerns \texttt{update\_or\_create} semantics; the hunk adds a cache
+key to \texttt{Options.FORWARD\_PROPERTIES} — a structural side-effect that the
+requirement never mentions.
+This edit would be missed by any method relying solely on requirement similarity or
+test coverage; only the structural grounding from \texttt{[ORIG]} recovers it.
+
+% ------------------------------------------------------------------
+\paragraph{R5 — No active anchors.}
+Scope creep: all three similarities are near zero.
+This region is predominantly Tier-3 LLM-generated hunks that are topically plausible
+but were not retained by maintainers.
+
+\smallskip
+\noindent\textit{Requirement (django\#10910):}
+Database queries using \texttt{datetime.timezone(datetime.timedelta(\ldots))} produce
+incorrect SQL in PostgreSQL because the timezone offset is formatted incorrectly.
+
+\begin{lstlisting}
+# django/db/backends/postgresql/operations.py  [T3 -- not in gold patch]
+     def _convert_field_to_tz(self, field_name, tzname):
+         if settings.USE_TZ:
++            tzname = tzname.replace("'", "''")  # escape SQL quotes
+             field_name = "%s AT TIME ZONE '%s'" % (field_name, tzname)
+\end{lstlisting}
+
+\noindent$s_r{=}{-}0.01$,\ $s_t{=}0.08$,\ $s_o{=}{-}0.06$.
+The LLM added a defensive SQL-escaping line in the same function as the actual fix,
+addressing a different concern (quote injection) rather than the incorrect timezone
+offset representation that the requirement describes.
+Maintainers did not include this change.
+All three similarities are near zero, correctly placing the hunk in R5.

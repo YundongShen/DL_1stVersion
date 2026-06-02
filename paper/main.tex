@@ -1,0 +1,226 @@
+\documentclass{article}
+
+% ---- Packages ----
+\usepackage[preprint]{neurips_2024}   % swap to [final] for camera-ready
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{enumitem}
+
+% ---- Convenience macros ----
+\newcommand{\REQ}{\texttt{[REQ]}}
+\newcommand{\TEST}{\texttt{[TEST]}}
+\newcommand{\ORIG}{\texttt{[ORIG]}}
+\newcommand{\HUNK}{\texttt{[HUNK]}}
+\newcommand{\tier}[1]{\textbf{T#1}}
+\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
+
+% -----------------------------------------------------------------------
+\title{The Geometry of Edit Necessity:\\
+Learning What a Requirement Change Entails}
+
+\author{
+  Yundong Shen \quad Miaowen Dong \\
+  \textit{Chalmers University of Technology} \\
+  \texttt{\{yundong, miaowen\}@chalmers.se}
+}
+
+\begin{document}
+\maketitle
+
+% -----------------------------------------------------------------------
+\begin{abstract}
+Pre-trained code models capture semantic similarity between natural language
+and code, yet they cannot reliably judge whether a specific code change is
+\emph{necessary} given a requirement---even when it is semantically relevant.
+We ask whether edit necessity is a geometrically learnable property of a joint
+embedding space.
+We propose a self-supervised contrastive framework that jointly embeds four
+entities---requirement (\REQ), tests (\TEST), source code units (\ORIG), and
+diff hunks (\HUNK)---trained on SWE-bench Full (2{,}291 instances, 12
+repositories) without any human-provided necessity labels.
+We report three findings.
+First, necessity tiers form statistically separable regions in the learned
+space (silhouette score rising from $0.010$ to $0.139$ after training).
+Second, edit necessity decomposes into two orthogonal components: a
+\emph{semantic} component already partially captured by pre-trained models,
+and a \emph{structural} component---whether the modified code unit is
+implicated by the requirement---that requires the \ORIG{} entity and is
+invisible to text-only representations.
+Third, this geometric structure does not emerge from standard InfoNCE over
+random negatives; it requires hard negatives drawn from LLM-generated
+scope-creep hunks that are semantically plausible but structurally
+unnecessary.
+On a held-out test set, our framework recovers $92.4\%$ of maintainer-endorsed
+but test-invisible changes (Tier-2 recall), compared to $80.6\%$ for an
+untrained UniXCoder baseline, with the gap attributable almost entirely to the
+structural component.
+\end{abstract}
+
+% -----------------------------------------------------------------------
+\section{Introduction}
+\label{sec:intro}
+
+Large pre-trained code models have demonstrated strong performance across a
+wide range of tasks that require semantic understanding: code search, clone
+detection, summarization, and defect prediction
+\citep{feng2020codebert,guo2022unixcoder}.
+These models learn rich representations of what code \emph{means}, and they
+transfer well to tasks that reduce to semantic similarity.
+Yet there is a class of judgment that these representations do not support:
+given a requirement change, determining which code modifications are
+\emph{necessary}---and which, while plausible, go beyond what the requirement
+entails.
+
+This distinction matters.
+Two diff hunks can be equally related to a bug report in the space of text;
+one may be indispensable to the fix while the other introduces unrelated
+behaviour.
+The difference does not lie in what the code \emph{says}, but in what the
+requirement \emph{entails} given the structure of the existing codebase and
+the boundaries of the test suite.
+Neither property is encoded in pre-trained code representations.
+
+\paragraph{An implicit signal in code evolution.}
+Human developers make necessity judgments implicitly with every commit.
+When a maintainer merges a patch for a bug report, they determine through code
+review and domain knowledge which changes belong to the fix and which do not.
+This judgment is shaped jointly by the requirement's semantics, the test
+suite's coverage, and the structural relationships within the codebase.
+Large repositories of resolved issues---such as SWE-bench
+\citep{jimenez2024swebench}---encode thousands of such decisions.
+Yet no existing approach learns the \emph{geometry} of necessity from this
+signal.
+
+\paragraph{Research question.}
+We ask: \emph{is edit necessity geometrically learnable in a joint embedding
+space?}
+More precisely, given an embedding function trained on (requirement, test,
+source, hunk) quadruples, do hunks at different necessity levels occupy
+statistically distinguishable regions, and does the model's geometric
+structure support recovering necessary changes that are invisible to tests?
+
+\paragraph{Approach.}
+We introduce \textbf{Edit Entailment Learning} (EEL), a self-supervised
+contrastive framework that embeds four entities into a shared $\ell_2$-normalised
+256-dimensional space.
+Type tokens (\REQ, \TEST, \ORIG, \HUNK) condition a shared UniXCoder
+\citep{guo2022unixcoder} backbone, and a MultiPair InfoNCE loss pulls four
+types of positive pairs together while pushing apart in-batch negatives.
+We define three necessity tiers derived entirely from SWE-bench's structure,
+requiring no human annotation:
+\begin{itemize}[itemsep=2pt,topsep=2pt]
+  \item \tier{1}: gold hunks covered by fail-to-pass tests (highest necessity)
+  \item \tier{2}: gold hunks \emph{not} covered by any test (maintainer-endorsed
+    but test-invisible)
+  \item \tier{3}: LLM-generated hunks outside the gold patch (scope creep)
+\end{itemize}
+Tier-2 is the critical case: these changes are necessary for correctness, yet
+every test-based method---static analysis, coverage-guided review,
+execution-based repair---treats them as untouched and therefore unverified.
+
+\paragraph{Findings.}
+We report three findings that together characterise the geometry of edit
+necessity.
+
+\textbf{Finding 1: Necessity is geometrically separable, but only after
+training with targeted hard negatives.}
+An untrained UniXCoder baseline yields a cosine-space silhouette score of
+$0.010$ across necessity tiers---effectively random.
+Adding basic InfoNCE over random in-batch negatives (M1) changes this
+negligibly ($0.011$).
+Only when LLM-generated scope-creep hunks serve as hard negatives (M2) does
+the score rise to $0.139$, with Mann-Whitney $U$ confirming significant
+separation at every tier boundary ($p < 10^{-25}$ for all gold-vs-drift
+comparisons).
+The finding implies that semantic hard negatives of a specific kind---
+plausible but structurally unnecessary---are necessary to induce geometric
+structure, a distinction that random sampling cannot provide.
+
+\textbf{Finding 2: Edit necessity decomposes into two orthogonal components.}
+The untrained model already achieves $80.6\%$ Tier-2 recall, which at first
+suggests the task is easy.
+We show this reflects a \emph{semantic} component of necessity---hunks whose
+code is textually related to the requirement---that UniXCoder's pre-training
+already captures.
+The remaining gap ($80.6\% \to 92.4\%$) is a \emph{structural} component:
+hunks that modify code units structurally implicated by the requirement, even
+when the connection is not explicit in the text.
+We operationalise this split via a Tier-2a/2b partition: T2a hunks modify
+existing code units (high structural necessity) and T2b hunks add new code
+(primarily semantic necessity).
+The \ORIG{} entity, which encodes the source unit being modified, is the sole
+carrier of structural necessity in the model.
+
+\textbf{Finding 3: The \ORIG{} entity is necessary and sufficient for the
+structural component.}
+An ablation that removes \ORIG{} from training (while retaining \REQ{} and
+\TEST) drops Tier-2 recall back toward the baseline.
+In contrast, removing \TEST{} leaves Tier-2 recall largely intact while
+degrading Tier-1 ranking.
+This dissociation directly supports the two-component decomposition: \TEST{}
+encodes the verified boundary (relevant to T1), \ORIG{} encodes structural
+implication (relevant to T2a), and neither is redundant with the other.
+\todo{Fill in ablation numbers once jobs complete.}
+
+\paragraph{Contributions.}
+\begin{enumerate}[itemsep=2pt,topsep=2pt]
+  \item We pose edit necessity as a geometric learning problem and provide the
+    first empirical evidence that it is learnable from code evolution data
+    without human annotation.
+  \item We identify a two-component decomposition of necessity (semantic vs.\
+    structural) and show that only the structural component requires learning;
+    the semantic component is inherited from pre-training.
+  \item We show that targeted hard negatives (structurally unnecessary but
+    semantically plausible hunks) are a prerequisite for learning geometric
+    necessity structure---a finding with implications for contrastive
+    learning in structured domains.
+\end{enumerate}
+
+% -----------------------------------------------------------------------
+\section{Background \& Problem Setup}
+\label{sec:setup}
+\todo{Write this section.}
+
+% -----------------------------------------------------------------------
+\section{Method}
+\label{sec:method}
+\todo{Write this section.}
+
+% -----------------------------------------------------------------------
+\section{Does the Geometry Exist?}
+\label{sec:geometry}
+\todo{Write this section.}
+
+% -----------------------------------------------------------------------
+\section{Two Components of Edit Necessity}
+\label{sec:two-components}
+\todo{Write this section.}
+
+% -----------------------------------------------------------------------
+\section{Retrieval Performance}
+\label{sec:retrieval}
+\todo{Write this section.}
+
+% -----------------------------------------------------------------------
+\section{Related Work}
+\label{sec:related}
+\todo{Write this section.}
+
+% -----------------------------------------------------------------------
+\section{Discussion \& Conclusion}
+\label{sec:conclusion}
+\todo{Write this section.}
+
+% -----------------------------------------------------------------------
+\bibliography{refs}
+\bibliographystyle{plainnat}
+
+\end{document}

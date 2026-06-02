@@ -3,10 +3,10 @@
 #SBATCH --gpus-per-node=A100fat:1
 #SBATCH -A NAISS2026-3-104
 #SBATCH --cpus-per-task=8
-#SBATCH --time=12:00:00
-#SBATCH --job-name=eval_m0
-#SBATCH --output=logs/eval_m0_%j.out
-#SBATCH --error=logs/eval_m0_%j.err
+#SBATCH --time=02:00:00
+#SBATCH --job-name=viz_encode
+#SBATCH --output=logs/viz_encode_%j.out
+#SBATCH --error=logs/viz_encode_%j.err
 
 set -euo pipefail
 export PYTHONHASHSEED=42
@@ -20,14 +20,11 @@ echo "Job started: $(date)"
 echo "Node: $(hostname)"
 echo "GPU: $(nvidia-smi --query-gpu=name --format=csv,noheader)"
 
-# M0: untrained UniXCoder baseline — no checkpoint, bypass MLP projection head
-python evaluate.py \
-    --checkpoint none \
-    --instances  data/processed/instances_full.jsonl \
-    --tier3      data/cache/tier3_hunks.jsonl \
-    --exp        all \
-    --umap \
-    --repo-pool \
-    --no-projection
+python scripts/viz_django.py \
+    --checkpoint-m2 checkpoints/m2/best.pt \
+    --instances      data/processed/instances_full.jsonl \
+    --tier3          data/cache/tier3_hunks.jsonl \
+    --out-prefix     logs/django_viz \
+    --encode-only
 
 echo "Done: $(date)"

@@ -23,10 +23,11 @@ echo "GPU: $(nvidia-smi --query-gpu=name --format=csv,noheader)"
 # E5 ablation: M4 trained without REQ entity (only orig_hunk pairs).
 # Neither REQ nor TEST were trained, so alpha=0, beta=0; ORIG only (gamma=0.5).
 python evaluate.py \
-    --checkpoint checkpoints/m4_abl_no_req/best.pt \
+    --checkpoint checkpoints/m2_abl_no_req/best.pt \
     --instances  data/processed/instances_full.jsonl \
     --tier3      data/cache/tier3_hunks.jsonl \
     --exp        all \
+    --repo-pool \
     --score-alpha 0.0 \
     --score-beta  0.0 \
     --score-gamma 0.5

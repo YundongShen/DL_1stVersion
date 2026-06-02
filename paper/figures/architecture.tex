@@ -1,0 +1,153 @@
+% architecture.tex  —  \input this file (no \documentclass here)
+% Preamble: \usepackage{tikz,amsmath,xcolor}
+%   \usetikzlibrary{arrows.meta,positioning,fit,backgrounds,calc}
+
+\definecolor{reqcol} {RGB}{103, 58,183}
+\definecolor{testcol}{RGB}{ 21,101,192}
+\definecolor{origcol}{RGB}{230, 81,  0}
+\definecolor{hunkcol}{RGB}{  0,121,107}
+\definecolor{t1col}  {RGB}{ 46,125, 50}
+\definecolor{t2col}  {RGB}{ 13, 71,161}
+\definecolor{t3col}  {RGB}{183, 28, 28}
+
+\begin{tikzpicture}[
+  >=Stealth,
+  box/.style  = {draw, rounded corners=4pt, thick, inner sep=5pt,
+                 font=\small, text centered},
+  req/.style  = {box, fill=reqcol!10, draw=reqcol!55},
+  test/.style = {box, fill=testcol!10, draw=testcol!55},
+  orig/.style = {box, fill=origcol!10, draw=origcol!60},
+  hunk/.style = {box, fill=hunkcol!10, draw=hunkcol!55},
+  t1b/.style  = {box, fill=t1col!13, draw=t1col!60},
+  t2b/.style  = {box, fill=t2col!13, draw=t2col!60},
+  t3b/.style  = {box, fill=t3col!13, draw=t3col!60},
+  enc/.style  = {draw, very thick, rounded corners=8pt,
+                 fill=gray!8, font=\small, text centered},
+  emb/.style  = {draw, circle, very thick, inner sep=4pt,
+                 font=\small, text centered},
+  arr/.style  = {->, thick},
+]
+
+%% ── Coordinate layout (cm) ───────────────────────────────────────────────
+%%
+%%  Panel A  │ div1 │       Panel B              │ div2 │  Panel C
+%%  x: 0–5.0 │  5.0 │       x: 5.0–15.8         │ 15.8 │  x: 15.8–20.0
+%%
+%%  Panel B internal (verified equal gaps):
+%%    entity centre  x = 7.2   left=5.7  right=8.7
+%%    encoder centre x = 11.3  left=10.3 right=12.3
+%%    emb centre     x = 14.3  left=13.9 right=14.7
+%%
+%%    gap div1→entity-left : 5.7 – 5.0 = 0.7 cm  ✓
+%%    gap entity-right→enc-left : 10.3 – 8.7 = 1.6 cm
+%%    gap enc-right→emb-left   : 13.9 – 12.3 = 1.6 cm  ← EQUAL ✓
+%%    gap emb-right→div2 : 15.8 – 14.7 = 1.1 cm  ✓
+%%
+%%  Both dividers: y = 0.4 to 7.4  (identical)
+%% ─────────────────────────────────────────────────────────────────────────
+
+%% ══════════════════════════════════════════════════════════════
+%%  (a)  Dataset Construction          x: 0 – 5.0
+%% ══════════════════════════════════════════════════════════════
+\node[font=\small\bfseries\sffamily] at (2.5, 7.1) {(a) Dataset Construction};
+
+\node[box, fill=gray!11, draw=gray!55, minimum width=3.6cm] (swe) at (2.5, 6.2)
+  {SWE-bench instance};
+
+\node[t1b, align=center, minimum width=1.4cm, minimum height=1.2cm]
+  (t1n) at (1.0, 4.4) {\textbf{T1}\\[2pt]\scriptsize gold\\[-2pt]\scriptsize +tested};
+\node[t2b, align=center, minimum width=1.4cm, minimum height=1.2cm]
+  (t2n) at (2.6, 4.4) {\textbf{T2}\\[2pt]\scriptsize gold\\[-2pt]\scriptsize untested};
+\node[t3b, align=center, minimum width=1.4cm, minimum height=1.2cm]
+  (t3n) at (4.2, 4.4) {\textbf{T3}\\[2pt]\scriptsize LLM\\[-2pt]\scriptsize non-gold};
+
+\draw[arr, t1col!80] (swe.south) to[out=235,in=95] (t1n.north);
+\draw[arr, t2col!80] (swe.south) -- (t2n.north);
+\draw[arr, t3col!80] (swe.south) to[out=305,in=85] (t3n.north);
+
+\node[font=\footnotesize, text=t1col!80, align=center] at (1.0, 3.2)
+  {necessary\\visible};
+\node[font=\footnotesize, text=t2col!80, align=center] at (2.6, 3.2)
+  {necessary\\invisible};
+\node[font=\footnotesize, text=t3col!80, align=center] at (4.2, 3.2)
+  {scope\\creep};
+
+%% divider 1: midpoint of T3-right (4.8) and entity-left (5.7) → x=5.25
+\draw[gray!45, dashed, thick] (5.25, 0.4) -- (5.25, 7.4);
+
+%% ══════════════════════════════════════════════════════════════
+%%  (b)  Contrastive Training          x: 5.0 – 15.8
+%% ══════════════════════════════════════════════════════════════
+\node[font=\small\bfseries\sffamily] at (10.4, 7.1) {(b) Contrastive Training};
+
+%%  Entity boxes: centre x=7.2, width=3.0cm → left=5.7, right=8.7
+\node[req,  minimum width=3.0cm] (reqn)  at (7.2, 6.0) {\texttt{<REQ>}\ \ requirement};
+\node[test, minimum width=3.0cm] (testn) at (7.2, 5.0) {\texttt{<TEST>}\ test fn.};
+\node[orig, minimum width=3.0cm] (orign) at (7.2, 4.0) {\texttt{<ORIG>}\ source unit};
+\node[hunk, minimum width=3.0cm] (hunkn) at (7.2, 3.0) {\texttt{<HUNK>}\ diff hunk};
+
+%%  Encoder: centre x=11.3, width=2.0cm, height=4.0cm
+%%    left=10.3  gap from entity-right (8.7) = 1.6 cm
+%%    right=12.3
+\node[enc, minimum width=2.0cm, minimum height=4.0cm, align=center]
+  (encoder) at (11.3, 4.5)
+  {UniXCoder\\[4pt]\footnotesize shared\\[-1pt]\footnotesize weights};
+
+\draw[arr] (reqn.east)  -- (encoder.west |- reqn);
+\draw[arr] (testn.east) -- (encoder.west |- testn);
+\draw[arr] (orign.east) -- (encoder.west |- orign);
+\draw[arr] (hunkn.east) -- (encoder.west |- hunkn);
+
+%%  Embedding circles: centre x=14.3, diam=0.8cm
+%%    left=13.9  gap from encoder-right (12.3) = 1.6 cm  ← equal to left gap ✓
+\node[emb, fill=reqcol!18,  draw=reqcol!65,  minimum size=0.8cm] (er) at (14.3, 6.0) {$\mathbf{r}$};
+\node[emb, fill=testcol!18, draw=testcol!65, minimum size=0.8cm] (et) at (14.3, 5.0) {$\mathbf{t}$};
+\node[emb, fill=origcol!18, draw=origcol!70, minimum size=0.8cm] (eo) at (14.3, 4.0) {$\mathbf{o}$};
+\node[emb, fill=hunkcol!18, draw=hunkcol!65, minimum size=0.8cm] (eh) at (14.3, 3.0) {$\mathbf{h}$};
+
+\draw[arr] (encoder.east |- reqn)  -- (er);
+\draw[arr] (encoder.east |- testn) -- (et);
+\draw[arr] (encoder.east |- orign) -- (eo);
+\draw[arr] (encoder.east |- hunkn) -- (eh);
+
+%%  Training box: centre at (11.3, 1.4)  — 3 short lines, width ≈ 4 cm
+%%    Arrow straight down from encoder.south (11.3, 2.5) to box top
+\node[draw=red!40, fill=red!4, rounded corners=4pt,
+      inner sep=6pt, font=\footnotesize, align=center] (trainbox) at (11.3, 1.4) {
+  \textcolor{red!70}{\bfseries Positive pairs}\\[2pt]
+  \textcolor{reqcol}{$\mathbf{r}$}\,--\,\textcolor{hunkcol}{$\mathbf{h}_{\mathrm{gold}}$}\enspace
+  \textcolor{reqcol}{$\mathbf{r}$}\,--\,\textcolor{testcol}{$\mathbf{t}$}\enspace
+  \textcolor{origcol}{$\mathbf{o}$}\,--\,\textcolor{hunkcol}{$\mathbf{h}$}\enspace
+  \textcolor{reqcol}{$\mathbf{r}$}\,--\,\textcolor{origcol}{$\mathbf{o}$}\\[2pt]
+  MultiPair InfoNCE loss
+};
+
+\draw[arr, gray!55] (encoder.south) -- (encoder |- trainbox.north);
+
+%% divider 2: midpoint of emb-right (14.7) and candh-left (16.55) → x=15.6
+\draw[gray!45, dashed, thick] (15.6, 0.4) -- (15.6, 7.4);
+
+%% ══════════════════════════════════════════════════════════════
+%%  (c)  Inference                     x: 15.8 – 20.0
+%% ══════════════════════════════════════════════════════════════
+\node[font=\small\bfseries\sffamily] at (17.8, 7.1) {(c) Inference};
+
+\node[hunk, minimum width=2.7cm, align=center] (candh) at (17.8, 6.0)
+  {candidate hunk $h$};
+
+\node[draw=gray!50, fill=gray!6, rounded corners=5pt,
+      inner sep=7pt, align=center, font=\small] (formula) at (17.8, 4.3) {
+  $s(h)\;=\;\alpha\cdot\mathrm{sim}(\mathbf{h},\,\mathbf{r})$\\[4pt]
+  $+\;\beta\cdot\mathrm{sim}(\mathbf{h},\,\bar{\mathbf{t}})$\\[4pt]
+  $+\;\gamma\cdot\mathrm{sim}(\mathbf{h},\,\bar{\mathbf{o}})$
+};
+
+\draw[arr] (candh.south) -- (formula.north);
+
+\node[box, fill=t1col!11, draw=t1col!55, minimum width=2.7cm, align=center]
+  (ranked) at (17.8, 2.5)
+  {rank hunks\\scope creep $\downarrow$};
+
+\draw[arr] (formula.south) -- (ranked.north);
+
+\end{tikzpicture}

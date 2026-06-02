@@ -23,10 +23,11 @@ echo "GPU: $(nvidia-smi --query-gpu=name --format=csv,noheader)"
 # E5 ablation: M4 trained without ORIG entity (no orig_hunk / req_orig pairs).
 # Evaluate with gamma=0 (matched score: no ORIG term) for fairest comparison.
 python evaluate.py \
-    --checkpoint checkpoints/m4_abl_no_orig/best.pt \
+    --checkpoint checkpoints/m2_abl_no_orig/best.pt \
     --instances  data/processed/instances_full.jsonl \
     --tier3      data/cache/tier3_hunks.jsonl \
     --exp        all \
+    --repo-pool \
     --score-alpha 1.0 \
     --score-beta  0.5 \
     --score-gamma 0.0
