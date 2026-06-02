@@ -1,0 +1,32 @@
+  [1;31merror[0m: [1msubprocess-exited-with-error[0m
+  
+  [31m×[0m [32mGetting requirements to build wheel[0m did not run successfully.
+  [31m│[0m exit code: [1;36m1[0m
+  [31m╰─>[0m [31m[22 lines of output][0m
+  [31m   [0m /tmp/pip-build-env-12n4qxfu/overlay/lib64/python3.11/site-packages/torch/_subclasses/functional_tensor.py:307: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:84.)
+  [31m   [0m   cpu = _conversion_method_template(device=torch.device("cpu"))
+  [31m   [0m Traceback (most recent call last):
+  [31m   [0m   File "/proj/test_extender/ICLR/EditBoundaryDetection/gpu_env/lib64/python3.11/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 389, in <module>
+  [31m   [0m     main()
+  [31m   [0m   File "/proj/test_extender/ICLR/EditBoundaryDetection/gpu_env/lib64/python3.11/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 373, in main
+  [31m   [0m     json_out["return_val"] = hook(**hook_input["kwargs"])
+  [31m   [0m                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  [31m   [0m   File "/proj/test_extender/ICLR/EditBoundaryDetection/gpu_env/lib64/python3.11/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py", line 143, in get_requires_for_build_wheel
+  [31m   [0m     return hook(config_settings)
+  [31m   [0m            ^^^^^^^^^^^^^^^^^^^^^
+  [31m   [0m   File "/tmp/pip-build-env-12n4qxfu/overlay/lib/python3.11/site-packages/setuptools/build_meta.py", line 333, in get_requires_for_build_wheel
+  [31m   [0m     return self._get_build_requires(config_settings, requirements=[])
+  [31m   [0m            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  [31m   [0m   File "/tmp/pip-build-env-12n4qxfu/overlay/lib/python3.11/site-packages/setuptools/build_meta.py", line 301, in _get_build_requires
+  [31m   [0m     self.run_setup()
+  [31m   [0m   File "/tmp/pip-build-env-12n4qxfu/overlay/lib/python3.11/site-packages/setuptools/build_meta.py", line 317, in run_setup
+  [31m   [0m     exec(code, locals())
+  [31m   [0m   File "<string>", line 1085, in <module>
+  [31m   [0m   File "<string>", line 916, in get_vllm_version
+  [31m   [0m   File "<string>", line 888, in get_nvcc_cuda_version
+  [31m   [0m AssertionError: CUDA_HOME is not set
+  [31m   [0m [31m[end of output][0m
+  
+  [1;35mnote[0m: This error originates from a subprocess, and is likely not a problem with pip.
+[31mERROR: Failed to build 'vllm' when getting requirements to build wheel[0m[31m
+[0m

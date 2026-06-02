@@ -1,0 +1,3 @@
+Fetching 24 files:   0%|          | 0/24 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 24 files:   4%|▍         | 1/24 [00:00<00:08,  2.87it/s]Fetching 24 files:  29%|██▉       | 7/24 [00:57<02:25,  8.59s/it]Fetching 24 files:  62%|██████▎   | 15/24 [01:35<00:55,  6.15s/it]Fetching 24 files: 100%|██████████| 24/24 [01:35<00:00,  3.97s/it]
+Download complete

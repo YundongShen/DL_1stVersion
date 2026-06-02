@@ -1,0 +1,169 @@
+2026-05-05 21:16:47,516 INFO Loading princeton-nlp/SWE-bench_Lite …
+2026-05-05 21:16:47,675 INFO HTTP Request: HEAD https://huggingface.co/datasets/princeton-nlp/SWE-bench_Lite/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+2026-05-05 21:16:47,687 INFO HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/princeton-nlp/SWE-bench_Lite/6ec7bb89b9342f664a54a6e0a6ea6501d3437cc2/README.md "HTTP/1.1 200 OK"
+2026-05-05 21:16:47,822 INFO HTTP Request: HEAD https://huggingface.co/datasets/princeton-nlp/SWE-bench_Lite/resolve/6ec7bb89b9342f664a54a6e0a6ea6501d3437cc2/SWE-bench_Lite.py "HTTP/1.1 404 Not Found"
+2026-05-05 21:16:48,195 INFO HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/princeton-nlp/SWE-bench_Lite/princeton-nlp/SWE-bench_Lite.py "HTTP/1.1 404 Not Found"
+2026-05-05 21:16:48,391 INFO HTTP Request: GET https://huggingface.co/api/datasets/princeton-nlp/SWE-bench_Lite/revision/6ec7bb89b9342f664a54a6e0a6ea6501d3437cc2 "HTTP/1.1 200 OK"
+2026-05-05 21:16:48,525 INFO HTTP Request: HEAD https://huggingface.co/datasets/princeton-nlp/SWE-bench_Lite/resolve/6ec7bb89b9342f664a54a6e0a6ea6501d3437cc2/.huggingface.yaml "HTTP/1.1 404 Not Found"
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-05-05 21:16:48,525 WARNING Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-05-05 21:16:48,682 INFO HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=princeton-nlp/SWE-bench_Lite "HTTP/1.1 200 OK"
+2026-05-05 21:16:48,820 INFO HTTP Request: GET https://huggingface.co/api/datasets/princeton-nlp/SWE-bench_Lite/tree/6ec7bb89b9342f664a54a6e0a6ea6501d3437cc2/data?recursive=true&expand=false "HTTP/1.1 200 OK"
+2026-05-05 21:16:48,951 INFO HTTP Request: GET https://huggingface.co/api/datasets/princeton-nlp/SWE-bench_Lite/tree/6ec7bb89b9342f664a54a6e0a6ea6501d3437cc2?recursive=false&expand=false "HTTP/1.1 200 OK"
+2026-05-05 21:16:49,086 INFO HTTP Request: HEAD https://huggingface.co/datasets/princeton-nlp/SWE-bench_Lite/resolve/6ec7bb89b9342f664a54a6e0a6ea6501d3437cc2/dataset_infos.json "HTTP/1.1 404 Not Found"
+2026-05-05 21:16:49,170 INFO Filtered to 77 instances from sympy/sympy
+2026-05-05 21:16:49,171 INFO [1/77] sympy__sympy-11400
+2026-05-05 21:16:49,172 INFO Already cloned: data/repos/sympy__sympy-11400
+2026-05-05 21:16:49,236 INFO [2/77] sympy__sympy-11870
+2026-05-05 21:16:49,236 INFO Already cloned: data/repos/sympy__sympy-11870
+2026-05-05 21:16:49,362 INFO [3/77] sympy__sympy-11897
+2026-05-05 21:16:49,362 INFO Already cloned: data/repos/sympy__sympy-11897
+2026-05-05 21:16:49,568 INFO [4/77] sympy__sympy-12171
+2026-05-05 21:16:49,568 INFO Already cloned: data/repos/sympy__sympy-12171
+2026-05-05 21:16:49,593 INFO [5/77] sympy__sympy-12236
+2026-05-05 21:16:49,593 INFO Already cloned: data/repos/sympy__sympy-12236
+2026-05-05 21:16:50,228 INFO [6/77] sympy__sympy-12419
+2026-05-05 21:16:50,228 INFO Already cloned: data/repos/sympy__sympy-12419
+2026-05-05 21:16:50,290 INFO [7/77] sympy__sympy-12454
+2026-05-05 21:16:50,290 INFO Already cloned: data/repos/sympy__sympy-12454
+2026-05-05 21:16:50,580 INFO [8/77] sympy__sympy-12481
+2026-05-05 21:16:50,580 INFO Already cloned: data/repos/sympy__sympy-12481
+2026-05-05 21:16:50,603 INFO [9/77] sympy__sympy-13031
+2026-05-05 21:16:50,603 INFO Already cloned: data/repos/sympy__sympy-13031
+2026-05-05 21:16:50,630 INFO [10/77] sympy__sympy-13043
+2026-05-05 21:16:50,630 INFO Already cloned: data/repos/sympy__sympy-13043
+2026-05-05 21:16:50,642 INFO [11/77] sympy__sympy-13146
+2026-05-05 21:16:50,642 INFO Already cloned: data/repos/sympy__sympy-13146
+2026-05-05 21:16:50,716 INFO [12/77] sympy__sympy-13177
+2026-05-05 21:16:50,716 INFO Already cloned: data/repos/sympy__sympy-13177
+2026-05-05 21:16:50,889 INFO [13/77] sympy__sympy-13437
+2026-05-05 21:16:50,889 INFO Already cloned: data/repos/sympy__sympy-13437
+2026-05-05 21:16:50,932 INFO [14/77] sympy__sympy-13471
+2026-05-05 21:16:50,932 INFO Already cloned: data/repos/sympy__sympy-13471
+2026-05-05 21:16:51,098 INFO [15/77] sympy__sympy-13480
+2026-05-05 21:16:51,098 INFO Already cloned: data/repos/sympy__sympy-13480
+2026-05-05 21:16:51,192 INFO [16/77] sympy__sympy-13647
+2026-05-05 21:16:51,192 INFO Already cloned: data/repos/sympy__sympy-13647
+2026-05-05 21:16:51,351 INFO [17/77] sympy__sympy-13773
+2026-05-05 21:16:51,351 INFO Already cloned: data/repos/sympy__sympy-13773
+2026-05-05 21:16:51,499 INFO [18/77] sympy__sympy-13895
+2026-05-05 21:16:51,499 INFO Already cloned: data/repos/sympy__sympy-13895
+2026-05-05 21:16:51,695 INFO [19/77] sympy__sympy-13915
+2026-05-05 21:16:51,695 INFO Already cloned: data/repos/sympy__sympy-13915
+2026-05-05 21:16:51,826 INFO [20/77] sympy__sympy-13971
+2026-05-05 21:16:51,826 INFO Already cloned: data/repos/sympy__sympy-13971
+2026-05-05 21:16:52,054 INFO [21/77] sympy__sympy-14024
+2026-05-05 21:16:52,054 INFO Already cloned: data/repos/sympy__sympy-14024
+2026-05-05 21:16:52,262 INFO [22/77] sympy__sympy-14308
+2026-05-05 21:16:52,262 INFO Already cloned: data/repos/sympy__sympy-14308
+2026-05-05 21:16:52,653 INFO [23/77] sympy__sympy-14317
+2026-05-05 21:16:52,653 INFO Already cloned: data/repos/sympy__sympy-14317
+2026-05-05 21:16:52,960 INFO [24/77] sympy__sympy-14396
+2026-05-05 21:16:52,960 INFO Already cloned: data/repos/sympy__sympy-14396
+2026-05-05 21:16:53,078 INFO [25/77] sympy__sympy-14774
+2026-05-05 21:16:53,079 INFO Already cloned: data/repos/sympy__sympy-14774
+2026-05-05 21:16:53,364 INFO [26/77] sympy__sympy-14817
+2026-05-05 21:16:53,364 INFO Already cloned: data/repos/sympy__sympy-14817
+2026-05-05 21:16:53,716 INFO [27/77] sympy__sympy-15011
+2026-05-05 21:16:53,716 INFO Already cloned: data/repos/sympy__sympy-15011
+2026-05-05 21:16:53,866 INFO [28/77] sympy__sympy-15308
+2026-05-05 21:16:53,866 INFO Already cloned: data/repos/sympy__sympy-15308
+2026-05-05 21:16:54,195 INFO [29/77] sympy__sympy-15345
+2026-05-05 21:16:54,195 INFO Already cloned: data/repos/sympy__sympy-15345
+2026-05-05 21:16:54,224 INFO [30/77] sympy__sympy-15346
+2026-05-05 21:16:54,224 INFO Already cloned: data/repos/sympy__sympy-15346
+2026-05-05 21:16:54,285 INFO [31/77] sympy__sympy-15609
+2026-05-05 21:16:54,285 INFO Already cloned: data/repos/sympy__sympy-15609
+2026-05-05 21:16:54,587 INFO [32/77] sympy__sympy-15678
+2026-05-05 21:16:54,588 INFO Already cloned: data/repos/sympy__sympy-15678
+2026-05-05 21:16:54,604 INFO [33/77] sympy__sympy-16106
+2026-05-05 21:16:54,604 INFO Already cloned: data/repos/sympy__sympy-16106
+2026-05-05 21:16:54,790 INFO [34/77] sympy__sympy-16281
+2026-05-05 21:16:54,790 INFO Already cloned: data/repos/sympy__sympy-16281
+2026-05-05 21:16:55,089 INFO [35/77] sympy__sympy-16503
+2026-05-05 21:16:55,090 INFO Already cloned: data/repos/sympy__sympy-16503
+2026-05-05 21:16:55,365 INFO [36/77] sympy__sympy-16792
+2026-05-05 21:16:55,365 INFO Already cloned: data/repos/sympy__sympy-16792
+2026-05-05 21:16:55,486 INFO [37/77] sympy__sympy-16988
+2026-05-05 21:16:55,486 INFO Already cloned: data/repos/sympy__sympy-16988
+2026-05-05 21:16:55,653 INFO [38/77] sympy__sympy-17022
+2026-05-05 21:16:55,653 INFO Already cloned: data/repos/sympy__sympy-17022
+2026-05-05 21:16:55,698 INFO [39/77] sympy__sympy-17139
+2026-05-05 21:16:55,698 INFO Already cloned: data/repos/sympy__sympy-17139
+2026-05-05 21:16:55,935 INFO [40/77] sympy__sympy-17630
+2026-05-05 21:16:55,936 INFO Already cloned: data/repos/sympy__sympy-17630
+2026-05-05 21:16:55,996 INFO [41/77] sympy__sympy-17655
+2026-05-05 21:16:55,996 INFO Already cloned: data/repos/sympy__sympy-17655
+2026-05-05 21:16:56,025 INFO [42/77] sympy__sympy-18057
+2026-05-05 21:16:56,025 INFO Already cloned: data/repos/sympy__sympy-18057
+2026-05-05 21:16:56,252 INFO [43/77] sympy__sympy-18087
+2026-05-05 21:16:56,252 INFO Already cloned: data/repos/sympy__sympy-18087
+2026-05-05 21:16:56,397 INFO [44/77] sympy__sympy-18189
+2026-05-05 21:16:56,397 INFO Already cloned: data/repos/sympy__sympy-18189
+2026-05-05 21:16:56,505 INFO [45/77] sympy__sympy-18199
+2026-05-05 21:16:56,506 INFO Already cloned: data/repos/sympy__sympy-18199
+2026-05-05 21:16:56,994 INFO [46/77] sympy__sympy-18532
+2026-05-05 21:16:56,994 INFO Already cloned: data/repos/sympy__sympy-18532
+2026-05-05 21:16:57,100 INFO [47/77] sympy__sympy-18621
+2026-05-05 21:16:57,100 INFO Already cloned: data/repos/sympy__sympy-18621
+2026-05-05 21:16:57,135 INFO [48/77] sympy__sympy-18698
+2026-05-05 21:16:57,135 INFO Already cloned: data/repos/sympy__sympy-18698
+2026-05-05 21:16:57,440 INFO [49/77] sympy__sympy-18835
+2026-05-05 21:16:57,440 INFO Already cloned: data/repos/sympy__sympy-18835
+2026-05-05 21:16:57,528 INFO [50/77] sympy__sympy-19007
+2026-05-05 21:16:57,528 INFO Already cloned: data/repos/sympy__sympy-19007
+2026-05-05 21:16:57,603 INFO [51/77] sympy__sympy-19254
+2026-05-05 21:16:57,603 INFO Already cloned: data/repos/sympy__sympy-19254
+2026-05-05 21:16:57,647 INFO [52/77] sympy__sympy-19487
+2026-05-05 21:16:57,647 INFO Already cloned: data/repos/sympy__sympy-19487
+2026-05-05 21:16:57,904 INFO [53/77] sympy__sympy-20049
+2026-05-05 21:16:57,905 INFO Already cloned: data/repos/sympy__sympy-20049
+2026-05-05 21:16:57,925 INFO [54/77] sympy__sympy-20154
+2026-05-05 21:16:57,925 INFO Already cloned: data/repos/sympy__sympy-20154
+2026-05-05 21:16:58,020 INFO [55/77] sympy__sympy-20212
+2026-05-05 21:16:58,020 INFO Already cloned: data/repos/sympy__sympy-20212
+2026-05-05 21:16:58,104 INFO [56/77] sympy__sympy-20322
+2026-05-05 21:16:58,105 INFO Already cloned: data/repos/sympy__sympy-20322
+2026-05-05 21:16:58,318 INFO [57/77] sympy__sympy-20442
+2026-05-05 21:16:58,318 INFO Already cloned: data/repos/sympy__sympy-20442
+2026-05-05 21:16:58,377 INFO [58/77] sympy__sympy-20590
+2026-05-05 21:16:58,377 INFO Already cloned: data/repos/sympy__sympy-20590
+2026-05-05 21:16:58,429 INFO [59/77] sympy__sympy-20639
+2026-05-05 21:16:58,429 INFO Already cloned: data/repos/sympy__sympy-20639
+2026-05-05 21:16:58,797 INFO [60/77] sympy__sympy-21055
+2026-05-05 21:16:58,797 INFO Already cloned: data/repos/sympy__sympy-21055
+2026-05-05 21:16:58,830 INFO [61/77] sympy__sympy-21171
+2026-05-05 21:16:58,830 INFO Already cloned: data/repos/sympy__sympy-21171
+2026-05-05 21:16:59,145 INFO [62/77] sympy__sympy-21379
+2026-05-05 21:16:59,145 INFO Already cloned: data/repos/sympy__sympy-21379
+2026-05-05 21:16:59,345 INFO [63/77] sympy__sympy-21612
+2026-05-05 21:16:59,345 INFO Already cloned: data/repos/sympy__sympy-21612
+2026-05-05 21:16:59,564 INFO [64/77] sympy__sympy-21614
+2026-05-05 21:16:59,564 INFO Already cloned: data/repos/sympy__sympy-21614
+2026-05-05 21:16:59,584 INFO [65/77] sympy__sympy-21627
+2026-05-05 21:16:59,584 INFO Already cloned: data/repos/sympy__sympy-21627
+2026-05-05 21:16:59,651 INFO [66/77] sympy__sympy-21847
+2026-05-05 21:16:59,651 INFO Already cloned: data/repos/sympy__sympy-21847
+2026-05-05 21:16:59,678 INFO [67/77] sympy__sympy-22005
+2026-05-05 21:16:59,678 INFO Already cloned: data/repos/sympy__sympy-22005
+2026-05-05 21:16:59,691 INFO [68/77] sympy__sympy-22714
+2026-05-05 21:16:59,691 INFO Already cloned: data/repos/sympy__sympy-22714
+2026-05-05 21:16:59,718 INFO [69/77] sympy__sympy-22840
+2026-05-05 21:16:59,718 INFO Already cloned: data/repos/sympy__sympy-22840
+2026-05-05 21:17:00,045 INFO [70/77] sympy__sympy-23117
+2026-05-05 21:17:00,046 INFO Already cloned: data/repos/sympy__sympy-23117
+2026-05-05 21:17:00,058 INFO [71/77] sympy__sympy-23191
+2026-05-05 21:17:00,058 INFO Already cloned: data/repos/sympy__sympy-23191
+2026-05-05 21:17:00,072 INFO [72/77] sympy__sympy-23262
+2026-05-05 21:17:00,073 INFO Already cloned: data/repos/sympy__sympy-23262
+2026-05-05 21:17:00,229 INFO [73/77] sympy__sympy-24066
+2026-05-05 21:17:00,229 INFO Already cloned: data/repos/sympy__sympy-24066
+2026-05-05 21:17:00,294 INFO [74/77] sympy__sympy-24102
+2026-05-05 21:17:00,294 INFO Already cloned: data/repos/sympy__sympy-24102
+2026-05-05 21:17:00,307 INFO [75/77] sympy__sympy-24152
+2026-05-05 21:17:00,307 INFO Already cloned: data/repos/sympy__sympy-24152
+2026-05-05 21:17:00,331 INFO [76/77] sympy__sympy-24213
+2026-05-05 21:17:00,331 INFO Already cloned: data/repos/sympy__sympy-24213
+2026-05-05 21:17:00,405 INFO [77/77] sympy__sympy-24909
+2026-05-05 21:17:00,405 INFO Already cloned: data/repos/sympy__sympy-24909
+2026-05-05 21:17:00,445 INFO Done. OK=77  FAILED=0  → data/raw/swebench_instances.jsonl

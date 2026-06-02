@@ -1,16 +1,18 @@
 # Model checkpoints (140 GB)
 checkpoints/
 
-# Large data files (keep splits.json)
-data/raw/
-data/processed/*.jsonl
-data/cache/
+# Large data files (> 100 MB — GitHub hard limit)
+data/raw/swebench_full_instances.jsonl
+data/processed/instances_full.jsonl
+data/cache/tier3_hunks.cache.jsonl
 
 # Virtual environment
 gpu_env/
 
-# Logs
-logs/
+# Embedding dumps (large npz) and slurm output logs
+logs/*.npz
+logs/*.out
+logs/*.err
 
 # Python
 __pycache__/

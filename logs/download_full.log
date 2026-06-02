@@ -1,0 +1,337 @@
+2026-05-07 14:13:07,753 INFO Resuming: 130 instances already in data/raw/swebench_full_instances.jsonl — skipping them
+2026-05-07 14:13:07,753 INFO Loading princeton-nlp/SWE-bench …
+2026-05-07 14:13:09,877 INFO [103/2294] django__django-10426  (ok=0 skip=102 fail=0)
+2026-05-07 14:13:09,877 INFO Already cloned: data/repos/django__django-10426
+2026-05-07 14:13:09,879 WARNING No source files found for django__django-10426 — skipping
+2026-05-07 14:13:09,882 INFO [131/2294] django__django-11049  (ok=0 skip=129 fail=1)
+2026-05-07 14:13:09,882 INFO Already cloned: data/repos/django__django-11049
+2026-05-07 14:13:09,890 INFO [133/2294] django__django-11057  (ok=1 skip=130 fail=1)
+2026-05-07 14:13:09,890 INFO Already cloned: data/repos/django__django-11057
+2026-05-07 14:13:09,897 INFO [134/2294] django__django-11062  (ok=2 skip=130 fail=1)
+2026-05-07 14:13:47,672 INFO [135/2294] django__django-11066  (ok=3 skip=130 fail=1)
+2026-05-07 14:14:25,200 INFO [136/2294] django__django-11070  (ok=4 skip=130 fail=1)
+2026-05-07 14:15:04,264 INFO [137/2294] django__django-11085  (ok=5 skip=130 fail=1)
+2026-05-07 14:15:40,160 INFO [138/2294] django__django-11087  (ok=6 skip=130 fail=1)
+2026-05-07 14:16:17,236 INFO [139/2294] django__django-11088  (ok=7 skip=130 fail=1)
+2026-05-07 14:16:54,538 INFO [140/2294] django__django-11095  (ok=8 skip=130 fail=1)
+2026-05-07 14:17:31,459 INFO [141/2294] django__django-11096  (ok=9 skip=130 fail=1)
+2026-05-07 14:18:08,123 INFO [142/2294] django__django-11099  (ok=10 skip=130 fail=1)
+2026-05-07 14:18:57,862 INFO [143/2294] django__django-11115  (ok=11 skip=130 fail=1)
+2026-05-07 14:19:58,399 INFO [144/2294] django__django-11119  (ok=12 skip=130 fail=1)
+2026-05-07 14:20:42,090 INFO [145/2294] django__django-11129  (ok=13 skip=130 fail=1)
+2026-05-07 14:21:23,897 INFO [146/2294] django__django-11133  (ok=14 skip=130 fail=1)
+2026-05-07 14:23:27,919 ERROR django__django-11133: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 14:23:27,920 INFO [147/2294] django__django-11138  (ok=14 skip=130 fail=2)
+2026-05-07 14:24:04,485 INFO [148/2294] django__django-11141  (ok=15 skip=130 fail=2)
+2026-05-07 14:24:39,821 INFO [149/2294] django__django-11149  (ok=16 skip=130 fail=2)
+2026-05-07 14:25:31,830 INFO [150/2294] django__django-11155  (ok=17 skip=130 fail=2)
+2026-05-07 14:27:04,252 INFO [151/2294] django__django-11163  (ok=18 skip=130 fail=2)
+2026-05-07 14:27:41,534 INFO [152/2294] django__django-11165  (ok=19 skip=130 fail=2)
+2026-05-07 14:28:09,650 INFO [153/2294] django__django-11166  (ok=20 skip=130 fail=2)
+2026-05-07 14:28:37,646 INFO [154/2294] django__django-11169  (ok=21 skip=130 fail=2)
+2026-05-07 14:29:05,486 INFO [155/2294] django__django-11170  (ok=22 skip=130 fail=2)
+2026-05-07 14:29:33,944 INFO [156/2294] django__django-11177  (ok=23 skip=130 fail=2)
+2026-05-07 14:30:04,298 INFO [157/2294] django__django-11179  (ok=24 skip=130 fail=2)
+2026-05-07 14:30:33,856 INFO [158/2294] django__django-11185  (ok=25 skip=130 fail=2)
+2026-05-07 14:31:05,933 INFO [159/2294] django__django-11194  (ok=26 skip=130 fail=2)
+2026-05-07 14:31:42,869 INFO [160/2294] django__django-11205  (ok=27 skip=130 fail=2)
+2026-05-07 14:32:25,591 INFO [161/2294] django__django-11206  (ok=28 skip=130 fail=2)
+2026-05-07 14:33:07,164 INFO [162/2294] django__django-11211  (ok=29 skip=130 fail=2)
+2026-05-07 14:33:43,942 INFO [163/2294] django__django-11214  (ok=30 skip=130 fail=2)
+2026-05-07 14:34:18,929 INFO [164/2294] django__django-11216  (ok=31 skip=130 fail=2)
+2026-05-07 14:34:54,545 INFO [165/2294] django__django-11234  (ok=32 skip=130 fail=2)
+2026-05-07 14:35:30,335 INFO [166/2294] django__django-11239  (ok=33 skip=130 fail=2)
+2026-05-07 14:36:10,479 INFO [167/2294] django__django-11244  (ok=34 skip=130 fail=2)
+2026-05-07 14:36:45,474 INFO [168/2294] django__django-11260  (ok=35 skip=130 fail=2)
+2026-05-07 14:38:10,027 INFO [169/2294] django__django-11265  (ok=36 skip=130 fail=2)
+2026-05-07 14:39:08,195 INFO [170/2294] django__django-11270  (ok=37 skip=130 fail=2)
+2026-05-07 14:39:51,853 INFO [171/2294] django__django-11276  (ok=38 skip=130 fail=2)
+2026-05-07 14:40:31,584 INFO [172/2294] django__django-11278  (ok=39 skip=130 fail=2)
+2026-05-07 14:41:10,748 INFO [173/2294] django__django-11279  (ok=40 skip=130 fail=2)
+2026-05-07 14:41:48,779 INFO [174/2294] django__django-11281  (ok=41 skip=130 fail=2)
+2026-05-07 14:42:25,652 INFO [175/2294] django__django-11283  (ok=42 skip=130 fail=2)
+2026-05-07 14:43:01,015 INFO [176/2294] django__django-11292  (ok=43 skip=130 fail=2)
+2026-05-07 14:43:52,164 INFO [177/2294] django__django-11294  (ok=44 skip=130 fail=2)
+2026-05-07 14:44:28,037 INFO [178/2294] django__django-11298  (ok=45 skip=130 fail=2)
+2026-05-07 14:45:05,026 INFO [179/2294] django__django-11299  (ok=46 skip=130 fail=2)
+2026-05-07 14:45:41,336 INFO [180/2294] django__django-11323  (ok=47 skip=130 fail=2)
+2026-05-07 14:46:17,175 INFO [181/2294] django__django-11333  (ok=48 skip=130 fail=2)
+2026-05-07 14:46:51,279 INFO [182/2294] django__django-11334  (ok=49 skip=130 fail=2)
+2026-05-07 14:47:23,656 INFO [183/2294] django__django-11354  (ok=50 skip=130 fail=2)
+2026-05-07 14:48:02,272 INFO [184/2294] django__django-11356  (ok=51 skip=130 fail=2)
+2026-05-07 14:48:32,250 INFO [185/2294] django__django-11359  (ok=52 skip=130 fail=2)
+2026-05-07 14:49:05,168 INFO [186/2294] django__django-11374  (ok=53 skip=130 fail=2)
+2026-05-07 14:51:08,452 ERROR django__django-11374: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 14:51:08,452 INFO [187/2294] django__django-11377  (ok=53 skip=130 fail=3)
+2026-05-07 14:53:12,364 ERROR django__django-11377: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 14:53:12,364 INFO [188/2294] django__django-11383  (ok=53 skip=130 fail=4)
+2026-05-07 14:55:18,267 ERROR django__django-11383: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 14:55:18,268 INFO [189/2294] django__django-11389  (ok=53 skip=130 fail=5)
+2026-05-07 14:57:24,982 ERROR django__django-11389: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 14:57:24,982 INFO [190/2294] django__django-11396  (ok=53 skip=130 fail=6)
+2026-05-07 14:59:31,926 ERROR django__django-11396: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 14:59:31,926 INFO [191/2294] django__django-11399  (ok=53 skip=130 fail=7)
+2026-05-07 15:01:37,514 ERROR django__django-11399: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 15:01:37,518 INFO [192/2294] django__django-11400  (ok=53 skip=130 fail=8)
+2026-05-07 15:03:44,215 ERROR django__django-11400: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 15:03:44,219 INFO [193/2294] django__django-11405  (ok=53 skip=130 fail=9)
+2026-05-07 15:05:49,809 ERROR django__django-11405: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 15:05:49,810 INFO [194/2294] django__django-11417  (ok=53 skip=130 fail=10)
+2026-05-07 15:07:54,819 ERROR django__django-11417: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 15:07:54,819 INFO [195/2294] django__django-11422  (ok=53 skip=130 fail=11)
+2026-05-07 15:10:00,377 ERROR django__django-11422: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 15:10:00,377 INFO [196/2294] django__django-11423  (ok=53 skip=130 fail=12)
+2026-05-07 15:12:06,013 ERROR django__django-11423: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 15:12:06,013 INFO [197/2294] django__django-11428  (ok=53 skip=130 fail=13)
+2026-05-07 15:14:11,964 ERROR django__django-11428: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 15:14:11,967 INFO [198/2294] django__django-11433  (ok=53 skip=130 fail=14)
+2026-05-07 15:16:17,425 ERROR django__django-11433: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 15:16:17,426 INFO [199/2294] django__django-11446  (ok=53 skip=130 fail=15)
+2026-05-07 15:18:23,273 ERROR django__django-11446: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 15:18:23,274 INFO [200/2294] django__django-11451  (ok=53 skip=130 fail=16)
+2026-05-07 15:20:29,051 ERROR django__django-11451: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 15:20:29,051 INFO [201/2294] django__django-11457  (ok=53 skip=130 fail=17)
+2026-05-07 15:22:35,070 ERROR django__django-11457: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 15:22:35,070 INFO [202/2294] django__django-11477  (ok=53 skip=130 fail=18)
+2026-05-07 15:24:40,739 ERROR django__django-11477: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 15:24:40,739 INFO [203/2294] django__django-11490  (ok=53 skip=130 fail=19)
+2026-05-07 15:26:45,993 ERROR django__django-11490: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 15:26:45,993 INFO [204/2294] django__django-11501  (ok=53 skip=130 fail=20)
+2026-05-07 15:28:51,544 ERROR django__django-11501: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 15:28:51,545 INFO [205/2294] django__django-11514  (ok=53 skip=130 fail=21)
+2026-05-07 15:30:57,183 ERROR django__django-11514: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 15:30:57,185 INFO [206/2294] django__django-11517  (ok=53 skip=130 fail=22)
+2026-05-07 15:32:54,787 INFO [207/2294] django__django-11525  (ok=54 skip=130 fail=22)
+2026-05-07 15:34:59,091 ERROR django__django-11525: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 15:34:59,091 INFO [208/2294] django__django-11527  (ok=54 skip=130 fail=23)
+2026-05-07 15:37:03,641 ERROR django__django-11527: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 15:37:03,644 INFO [209/2294] django__django-11532  (ok=54 skip=130 fail=24)
+2026-05-07 15:39:05,741 INFO [210/2294] django__django-11539  (ok=55 skip=130 fail=24)
+2026-05-07 15:41:10,039 ERROR django__django-11539: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 15:41:10,101 INFO [211/2294] django__django-11543  (ok=55 skip=130 fail=25)
+2026-05-07 15:43:14,986 ERROR django__django-11543: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 15:43:14,987 INFO [212/2294] django__django-11550  (ok=55 skip=130 fail=26)
+2026-05-07 15:45:20,027 ERROR django__django-11550: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 15:45:20,027 INFO [213/2294] django__django-11551  (ok=55 skip=130 fail=27)
+2026-05-07 15:47:25,066 ERROR django__django-11551: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 15:47:25,066 INFO [214/2294] django__django-11555  (ok=55 skip=130 fail=28)
+2026-05-07 15:49:29,692 ERROR django__django-11555: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 15:49:29,693 INFO [215/2294] django__django-11559  (ok=55 skip=130 fail=29)
+2026-05-07 15:51:34,733 ERROR django__django-11559: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 15:51:34,733 INFO [216/2294] django__django-11560  (ok=55 skip=130 fail=30)
+2026-05-07 15:53:39,546 ERROR django__django-11560: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 15:53:39,550 INFO [217/2294] django__django-11564  (ok=55 skip=130 fail=31)
+2026-05-07 15:55:43,527 ERROR django__django-11564: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 15:55:43,527 INFO [218/2294] django__django-11583  (ok=55 skip=130 fail=32)
+2026-05-07 15:57:48,485 ERROR django__django-11583: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 15:57:48,487 INFO [219/2294] django__django-11584  (ok=55 skip=130 fail=33)
+2026-05-07 15:59:52,701 ERROR django__django-11584: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 15:59:52,702 INFO [220/2294] django__django-11591  (ok=55 skip=130 fail=34)
+2026-05-07 16:01:50,834 INFO [221/2294] django__django-11592  (ok=56 skip=130 fail=34)
+2026-05-07 16:03:37,732 INFO [222/2294] django__django-11603  (ok=57 skip=130 fail=34)
+2026-05-07 16:05:17,544 INFO [223/2294] django__django-11605  (ok=58 skip=130 fail=34)
+2026-05-07 16:07:21,849 ERROR django__django-11605: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 16:07:21,849 INFO [224/2294] django__django-11612  (ok=58 skip=130 fail=35)
+2026-05-07 16:09:26,627 ERROR django__django-11612: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 16:09:26,627 INFO [225/2294] django__django-11618  (ok=58 skip=130 fail=36)
+2026-05-07 16:11:30,694 ERROR django__django-11618: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 16:11:30,695 INFO [226/2294] django__django-11620  (ok=58 skip=130 fail=37)
+2026-05-07 16:13:36,351 ERROR django__django-11620: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 16:13:36,355 INFO [227/2294] django__django-11622  (ok=58 skip=130 fail=38)
+2026-05-07 16:15:45,219 ERROR django__django-11622: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 16:15:45,219 INFO [228/2294] django__django-11630  (ok=58 skip=130 fail=39)
+2026-05-07 16:17:51,468 ERROR django__django-11630: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 16:17:51,468 INFO [229/2294] django__django-11638  (ok=58 skip=130 fail=40)
+2026-05-07 16:19:55,796 ERROR django__django-11638: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 16:19:55,797 INFO [230/2294] django__django-11666  (ok=58 skip=130 fail=41)
+2026-05-07 16:22:01,074 ERROR django__django-11666: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 16:22:01,075 INFO [231/2294] django__django-11669  (ok=58 skip=130 fail=42)
+2026-05-07 16:23:56,162 INFO [232/2294] django__django-11677  (ok=59 skip=130 fail=42)
+2026-05-07 16:25:19,967 INFO [233/2294] django__django-11680  (ok=60 skip=130 fail=42)
+2026-05-07 16:27:10,694 INFO [234/2294] django__django-11688  (ok=61 skip=130 fail=42)
+2026-05-07 16:29:13,040 INFO [235/2294] django__django-11692  (ok=62 skip=130 fail=42)
+2026-05-07 16:31:17,164 ERROR django__django-11692: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 16:31:17,165 INFO [236/2294] django__django-11695  (ok=62 skip=130 fail=43)
+2026-05-07 16:33:11,615 INFO [237/2294] django__django-11701  (ok=63 skip=130 fail=43)
+2026-05-07 16:35:15,395 ERROR django__django-11701: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 16:35:15,395 INFO [238/2294] django__django-11707  (ok=63 skip=130 fail=44)
+2026-05-07 16:37:04,420 INFO [239/2294] django__django-11727  (ok=64 skip=130 fail=44)
+2026-05-07 16:39:08,774 ERROR django__django-11727: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 16:39:08,775 INFO [240/2294] django__django-11728  (ok=64 skip=130 fail=45)
+2026-05-07 16:41:01,630 INFO [241/2294] django__django-11734  (ok=65 skip=130 fail=45)
+2026-05-07 16:43:05,259 INFO [242/2294] django__django-11740  (ok=66 skip=130 fail=45)
+2026-05-07 16:44:44,018 INFO [243/2294] django__django-11742  (ok=67 skip=130 fail=45)
+2026-05-07 16:46:16,831 INFO [244/2294] django__django-11749  (ok=68 skip=130 fail=45)
+2026-05-07 16:47:55,173 INFO [245/2294] django__django-11751  (ok=69 skip=130 fail=45)
+2026-05-07 16:49:41,292 INFO [246/2294] django__django-11754  (ok=70 skip=130 fail=45)
+2026-05-07 16:51:45,352 ERROR django__django-11754: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 16:51:45,352 INFO [247/2294] django__django-11772  (ok=70 skip=130 fail=46)
+2026-05-07 16:53:51,299 ERROR django__django-11772: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 16:53:51,299 INFO [248/2294] django__django-11790  (ok=70 skip=130 fail=47)
+2026-05-07 16:55:28,054 INFO [249/2294] django__django-11797  (ok=71 skip=130 fail=47)
+2026-05-07 16:57:22,163 INFO [250/2294] django__django-11808  (ok=72 skip=130 fail=47)
+2026-05-07 16:59:00,015 INFO [251/2294] django__django-11810  (ok=73 skip=130 fail=47)
+2026-05-07 17:01:00,454 INFO [252/2294] django__django-11815  (ok=74 skip=130 fail=47)
+2026-05-07 17:02:41,568 INFO [253/2294] django__django-11820  (ok=75 skip=130 fail=47)
+2026-05-07 17:04:11,957 INFO [254/2294] django__django-11823  (ok=76 skip=130 fail=47)
+2026-05-07 17:05:50,133 INFO [255/2294] django__django-11829  (ok=77 skip=130 fail=47)
+2026-05-07 17:07:34,096 INFO [256/2294] django__django-11848  (ok=78 skip=130 fail=47)
+2026-05-07 17:09:11,948 INFO [257/2294] django__django-11880  (ok=79 skip=130 fail=47)
+2026-05-07 17:10:43,409 INFO [258/2294] django__django-11883  (ok=80 skip=130 fail=47)
+2026-05-07 17:12:47,644 ERROR django__django-11883: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 17:12:47,644 INFO [259/2294] django__django-11885  (ok=80 skip=130 fail=48)
+2026-05-07 17:14:38,873 INFO [260/2294] django__django-11891  (ok=81 skip=130 fail=48)
+2026-05-07 17:16:42,550 ERROR django__django-11891: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 17:16:42,550 INFO [261/2294] django__django-11893  (ok=81 skip=130 fail=49)
+2026-05-07 17:18:48,185 ERROR django__django-11893: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 17:18:48,186 INFO [262/2294] django__django-11894  (ok=81 skip=130 fail=50)
+2026-05-07 17:20:51,819 ERROR django__django-11894: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 17:20:51,819 INFO [263/2294] django__django-11903  (ok=81 skip=130 fail=51)
+2026-05-07 17:22:30,910 INFO [264/2294] django__django-11905  (ok=82 skip=130 fail=51)
+2026-05-07 17:23:35,957 INFO [265/2294] django__django-11910  (ok=83 skip=130 fail=51)
+2026-05-07 17:24:31,951 INFO [266/2294] django__django-11911  (ok=84 skip=130 fail=51)
+2026-05-07 17:25:43,156 INFO [267/2294] django__django-11916  (ok=85 skip=130 fail=51)
+2026-05-07 17:26:42,794 INFO [268/2294] django__django-11951  (ok=86 skip=130 fail=51)
+2026-05-07 17:27:41,312 INFO [269/2294] django__django-11964  (ok=87 skip=130 fail=51)
+2026-05-07 17:29:44,705 ERROR django__django-11964: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 17:29:44,706 INFO [270/2294] django__django-11983  (ok=87 skip=130 fail=52)
+2026-05-07 17:31:35,445 INFO [271/2294] django__django-11991  (ok=88 skip=130 fail=52)
+2026-05-07 17:33:14,372 INFO [272/2294] django__django-11997  (ok=89 skip=130 fail=52)
+2026-05-07 17:34:54,571 INFO [273/2294] django__django-11999  (ok=90 skip=130 fail=52)
+2026-05-07 17:36:36,933 INFO [274/2294] django__django-12009  (ok=91 skip=130 fail=52)
+2026-05-07 17:38:35,523 INFO [275/2294] django__django-12039  (ok=92 skip=130 fail=52)
+2026-05-07 17:40:13,158 INFO [276/2294] django__django-12049  (ok=93 skip=130 fail=52)
+2026-05-07 17:41:51,622 INFO [277/2294] django__django-12050  (ok=94 skip=130 fail=52)
+2026-05-07 17:43:56,778 ERROR django__django-12050: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 17:43:56,779 INFO [278/2294] django__django-12062  (ok=94 skip=130 fail=53)
+2026-05-07 17:46:01,087 ERROR django__django-12062: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 17:46:01,088 INFO [279/2294] django__django-12073  (ok=94 skip=130 fail=54)
+2026-05-07 17:47:35,946 INFO [280/2294] django__django-12091  (ok=95 skip=130 fail=54)
+2026-05-07 17:49:34,532 INFO [281/2294] django__django-12113  (ok=96 skip=130 fail=54)
+2026-05-07 17:51:37,099 INFO [282/2294] django__django-12121  (ok=97 skip=130 fail=54)
+2026-05-07 17:53:15,483 INFO [283/2294] django__django-12122  (ok=98 skip=130 fail=54)
+2026-05-07 17:54:55,272 INFO [284/2294] django__django-12125  (ok=99 skip=130 fail=54)
+2026-05-07 17:56:42,225 INFO [285/2294] django__django-12132  (ok=100 skip=130 fail=54)
+2026-05-07 17:58:23,214 INFO [286/2294] django__django-12143  (ok=101 skip=130 fail=54)
+2026-05-07 18:00:09,887 INFO [287/2294] django__django-12148  (ok=102 skip=130 fail=54)
+2026-05-07 18:01:58,877 INFO [288/2294] django__django-12153  (ok=103 skip=130 fail=54)
+2026-05-07 18:03:38,980 INFO [289/2294] django__django-12155  (ok=104 skip=130 fail=54)
+2026-05-07 18:05:42,674 ERROR django__django-12155: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 18:05:42,674 INFO [290/2294] django__django-12161  (ok=104 skip=130 fail=55)
+2026-05-07 18:07:29,022 INFO [291/2294] django__django-12172  (ok=105 skip=130 fail=55)
+2026-05-07 18:09:32,919 ERROR django__django-12172: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 18:09:32,919 INFO [292/2294] django__django-12184  (ok=105 skip=130 fail=56)
+2026-05-07 18:11:37,451 ERROR django__django-12184: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 18:11:37,457 INFO [293/2294] django__django-12185  (ok=105 skip=130 fail=57)
+2026-05-07 18:13:41,121 ERROR django__django-12185: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 18:13:41,125 INFO [294/2294] django__django-12187  (ok=105 skip=130 fail=58)
+2026-05-07 18:15:45,133 ERROR django__django-12187: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 18:15:45,133 INFO [295/2294] django__django-12193  (ok=105 skip=130 fail=59)
+2026-05-07 18:17:35,755 INFO [296/2294] django__django-12196  (ok=106 skip=130 fail=59)
+2026-05-07 18:19:25,951 INFO [297/2294] django__django-12198  (ok=107 skip=130 fail=59)
+2026-05-07 18:20:51,470 INFO [298/2294] django__django-12209  (ok=108 skip=130 fail=59)
+2026-05-07 18:22:07,119 INFO [299/2294] django__django-12212  (ok=109 skip=130 fail=59)
+2026-05-07 18:23:22,323 INFO [300/2294] django__django-12225  (ok=110 skip=130 fail=59)
+2026-05-07 18:24:31,948 INFO [301/2294] django__django-12231  (ok=111 skip=130 fail=59)
+2026-05-07 18:25:41,548 INFO [302/2294] django__django-12237  (ok=112 skip=130 fail=59)
+2026-05-07 18:27:28,046 INFO [303/2294] django__django-12262  (ok=113 skip=130 fail=59)
+2026-05-07 18:28:41,692 INFO [304/2294] django__django-12273  (ok=114 skip=130 fail=59)
+2026-05-07 18:29:59,686 INFO [305/2294] django__django-12276  (ok=115 skip=130 fail=59)
+2026-05-07 18:31:20,030 INFO [306/2294] django__django-12281  (ok=116 skip=130 fail=59)
+2026-05-07 18:32:47,845 INFO [307/2294] django__django-12284  (ok=117 skip=130 fail=59)
+2026-05-07 18:34:40,146 INFO [308/2294] django__django-12286  (ok=118 skip=130 fail=59)
+2026-05-07 18:36:33,466 INFO [309/2294] django__django-12299  (ok=119 skip=130 fail=59)
+2026-05-07 18:38:38,031 ERROR django__django-12299: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 18:38:38,031 INFO [310/2294] django__django-12304  (ok=119 skip=130 fail=60)
+2026-05-07 18:40:42,071 ERROR django__django-12304: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 18:40:42,071 INFO [311/2294] django__django-12306  (ok=119 skip=130 fail=61)
+2026-05-07 18:42:46,087 ERROR django__django-12306: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 18:42:46,087 INFO [312/2294] django__django-12308  (ok=119 skip=130 fail=62)
+2026-05-07 18:44:50,219 ERROR django__django-12308: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 18:44:50,219 INFO [313/2294] django__django-12313  (ok=119 skip=130 fail=63)
+2026-05-07 18:46:54,069 ERROR django__django-12313: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 18:46:54,070 INFO [314/2294] django__django-12325  (ok=119 skip=130 fail=64)
+2026-05-07 18:48:58,197 ERROR django__django-12325: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 18:48:58,197 INFO [315/2294] django__django-12343  (ok=119 skip=130 fail=65)
+2026-05-07 18:51:02,387 ERROR django__django-12343: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 18:51:02,388 INFO [316/2294] django__django-12360  (ok=119 skip=130 fail=66)
+2026-05-07 18:53:06,256 ERROR django__django-12360: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 18:53:06,257 INFO [317/2294] django__django-12364  (ok=119 skip=130 fail=67)
+2026-05-07 18:54:48,656 INFO [318/2294] django__django-12394  (ok=120 skip=130 fail=67)
+2026-05-07 18:56:52,554 ERROR django__django-12394: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 18:56:52,559 INFO [319/2294] django__django-12396  (ok=120 skip=130 fail=68)
+2026-05-07 18:58:57,055 ERROR django__django-12396: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 18:58:57,055 INFO [320/2294] django__django-12406  (ok=120 skip=130 fail=69)
+2026-05-07 19:00:48,407 INFO [321/2294] django__django-12407  (ok=121 skip=130 fail=69)
+2026-05-07 19:02:24,828 INFO [322/2294] django__django-12419  (ok=122 skip=130 fail=69)
+2026-05-07 19:04:03,093 INFO [323/2294] django__django-12430  (ok=123 skip=130 fail=69)
+2026-05-07 19:05:37,965 INFO [324/2294] django__django-12431  (ok=124 skip=130 fail=69)
+2026-05-07 19:07:06,010 INFO [325/2294] django__django-12441  (ok=125 skip=130 fail=69)
+2026-05-07 19:08:31,819 INFO [326/2294] django__django-12453  (ok=126 skip=130 fail=69)
+2026-05-07 19:09:55,426 INFO [327/2294] django__django-12458  (ok=127 skip=130 fail=69)
+2026-05-07 19:11:19,746 INFO [328/2294] django__django-12464  (ok=128 skip=130 fail=69)
+2026-05-07 19:13:23,202 ERROR django__django-12464: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 19:13:23,202 INFO [329/2294] django__django-12469  (ok=128 skip=130 fail=70)
+2026-05-07 19:15:04,936 INFO [330/2294] django__django-12470  (ok=129 skip=130 fail=70)
+2026-05-07 19:17:02,583 INFO [331/2294] django__django-12477  (ok=130 skip=130 fail=70)
+2026-05-07 19:19:02,124 INFO [332/2294] django__django-12484  (ok=131 skip=130 fail=70)
+2026-05-07 19:20:43,329 INFO [333/2294] django__django-12485  (ok=132 skip=130 fail=70)
+2026-05-07 19:22:13,602 INFO [334/2294] django__django-12486  (ok=133 skip=130 fail=70)
+2026-05-07 19:23:43,221 INFO [335/2294] django__django-12496  (ok=134 skip=130 fail=70)
+2026-05-07 19:25:21,003 INFO [336/2294] django__django-12497  (ok=135 skip=130 fail=70)
+2026-05-07 19:27:01,552 INFO [337/2294] django__django-12503  (ok=136 skip=130 fail=70)
+2026-05-07 19:28:48,752 INFO [338/2294] django__django-12504  (ok=137 skip=130 fail=70)
+2026-05-07 19:30:50,808 INFO [339/2294] django__django-12508  (ok=138 skip=130 fail=70)
+2026-05-07 19:32:46,983 INFO [340/2294] django__django-12513  (ok=139 skip=130 fail=70)
+2026-05-07 19:34:45,668 INFO [341/2294] django__django-12517  (ok=140 skip=130 fail=70)
+2026-05-07 19:36:45,481 INFO [342/2294] django__django-12518  (ok=141 skip=130 fail=70)
+2026-05-07 19:38:44,781 INFO [343/2294] django__django-12519  (ok=142 skip=130 fail=70)
+2026-05-07 19:40:45,452 INFO [344/2294] django__django-12532  (ok=143 skip=130 fail=70)
+2026-05-07 19:42:49,641 ERROR django__django-12532: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 19:42:49,641 INFO [345/2294] django__django-12553  (ok=143 skip=130 fail=71)
+2026-05-07 19:44:53,214 INFO [346/2294] django__django-12556  (ok=144 skip=130 fail=71)
+2026-05-07 19:46:57,039 ERROR django__django-12556: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 19:46:57,039 INFO [347/2294] django__django-12568  (ok=144 skip=130 fail=72)
+2026-05-07 19:49:00,846 ERROR django__django-12568: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 19:49:00,847 INFO [348/2294] django__django-12588  (ok=144 skip=130 fail=73)
+2026-05-07 19:51:05,189 ERROR django__django-12588: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 19:51:05,192 INFO [349/2294] django__django-12589  (ok=144 skip=130 fail=74)
+2026-05-07 19:53:09,352 ERROR django__django-12589: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 19:53:09,352 INFO [350/2294] django__django-12591  (ok=144 skip=130 fail=75)
+2026-05-07 19:55:13,448 ERROR django__django-12591: unexpected error — Command '['git', 'checkout', 'FETCH_HEAD']' timed out after 120 seconds
+2026-05-07 19:55:13,451 INFO [351/2294] django__django-12613  (ok=144 skip=130 fail=76)
+2026-05-07 19:57:01,280 INFO [352/2294] django__django-12627  (ok=145 skip=130 fail=76)
+2026-05-07 19:58:26,114 INFO [353/2294] django__django-12630  (ok=146 skip=130 fail=76)
+2026-05-07 19:59:48,344 INFO [354/2294] django__django-12663  (ok=147 skip=130 fail=76)
+2026-05-07 20:01:12,367 INFO [355/2294] django__django-12669  (ok=148 skip=130 fail=76)
+2026-05-07 20:02:42,539 INFO [356/2294] django__django-12671  (ok=149 skip=130 fail=76)
+2026-05-07 20:04:15,406 INFO [357/2294] django__django-12700  (ok=150 skip=130 fail=76)
+2026-05-07 20:05:35,158 INFO [358/2294] django__django-12708  (ok=151 skip=130 fail=76)
+2026-05-07 20:07:29,337 INFO [359/2294] django__django-12713  (ok=152 skip=130 fail=76)
+2026-05-07 20:08:47,422 INFO [360/2294] django__django-12733  (ok=153 skip=130 fail=76)
+2026-05-07 20:09:59,317 INFO [361/2294] django__django-12734  (ok=154 skip=130 fail=76)
+2026-05-07 20:11:16,537 INFO [362/2294] django__django-12741  (ok=155 skip=130 fail=76)
+2026-05-07 20:12:37,930 INFO [363/2294] django__django-12747  (ok=156 skip=130 fail=76)
+2026-05-07 20:13:54,041 INFO [364/2294] django__django-12748  (ok=157 skip=130 fail=76)
+2026-05-07 20:14:54,202 INFO [365/2294] django__django-12754  (ok=158 skip=130 fail=76)
+2026-05-07 20:15:51,789 INFO [366/2294] django__django-12771  (ok=159 skip=130 fail=76)
+2026-05-07 20:16:51,504 INFO [367/2294] django__django-12774  (ok=160 skip=130 fail=76)
+2026-05-07 20:17:46,760 INFO [368/2294] django__django-12796  (ok=161 skip=130 fail=76)
+2026-05-07 20:18:46,218 INFO [369/2294] django__django-12803  (ok=162 skip=130 fail=76)
+2026-05-07 20:19:44,472 INFO [370/2294] django__django-12821  (ok=163 skip=130 fail=76)
+2026-05-07 20:20:40,717 INFO [371/2294] django__django-12830  (ok=164 skip=130 fail=76)
+2026-05-07 20:21:33,979 INFO [372/2294] django__django-12851  (ok=165 skip=130 fail=76)
+2026-05-07 20:22:26,514 INFO [373/2294] django__django-12855  (ok=166 skip=130 fail=76)
+2026-05-07 20:23:22,129 INFO [374/2294] django__django-12856  (ok=167 skip=130 fail=76)
+2026-05-07 20:24:15,751 INFO [375/2294] django__django-12858  (ok=168 skip=130 fail=76)
+2026-05-07 20:25:08,302 INFO [376/2294] django__django-12869  (ok=169 skip=130 fail=76)
+2026-05-07 20:25:58,994 INFO [377/2294] django__django-12906  (ok=170 skip=130 fail=76)
+2026-05-07 20:26:48,543 INFO [378/2294] django__django-12908  (ok=171 skip=130 fail=76)
+2026-05-07 20:27:35,879 INFO [379/2294] django__django-12910  (ok=172 skip=130 fail=76)
+2026-05-07 20:28:26,221 INFO [380/2294] django__django-12912  (ok=173 skip=130 fail=76)
+2026-05-07 20:29:11,318 INFO [381/2294] django__django-12915  (ok=174 skip=130 fail=76)
+2026-05-07 20:29:58,547 INFO [382/2294] django__django-12928  (ok=175 skip=130 fail=76)
+2026-05-07 20:30:46,128 INFO [383/2294] django__django-12933  (ok=176 skip=130 fail=76)
+2026-05-07 20:31:34,126 INFO [384/2294] django__django-12936  (ok=177 skip=130 fail=76)
+2026-05-07 20:32:20,141 INFO [385/2294] django__django-12951  (ok=178 skip=130 fail=76)
+2026-05-07 20:33:06,437 INFO [386/2294] django__django-12953  (ok=179 skip=130 fail=76)
